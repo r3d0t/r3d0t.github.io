@@ -9,3 +9,20 @@
 ';
 
 /* append your custom style below */
+
+/* avatar centering */
+#sidebar #avatar {
+  display: block;
+  margin: 0 auto;
+}
+
+#sidebar #avatar img {
+  display: block;
+  margin: 0 auto;
+}
+
+#sidebar #avatar img {
+  width: 128px;
+  height: 128px;
+  margin-top: 0.5rem;   /* move down a bit if needed */
+}
