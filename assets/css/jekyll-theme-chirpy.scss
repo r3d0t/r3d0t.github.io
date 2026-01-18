@@ -10,19 +10,19 @@
 
 /* append your custom style below */
 
-/* avatar centering */
+/* avatar centering + no stretch */
 #sidebar #avatar {
   display: block;
-  margin: 0 auto;
+  margin: 0.5rem auto;  /* centers the avatar block */
+  width: 128px;
+  height: 128px;
+  overflow: hidden;     /* crop overflow */
+  border-radius: 50%;   /* circular avatar; use 0 for square */
 }
 
 #sidebar #avatar img {
   display: block;
-  margin: 0 auto;
-}
-
-#sidebar #avatar img {
-  width: 128px;
-  height: 128px;
-  margin-top: 0.5rem;   /* move down a bit if needed */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    /* keep aspect ratio, crop instead of stretch */
 }
