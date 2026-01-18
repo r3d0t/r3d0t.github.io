@@ -1,6 +1,6 @@
 ---
 # the default layout is 'page'
-title: About
+title: "$ whoami"
 icon: fas fa-user-secret
 order: 4
 ---
