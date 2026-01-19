@@ -210,9 +210,8 @@ If you don't set the root password, you can just run root commands without any p
 The Boot Options "Boot0pts"  configuration is the most interesting
 ![NetworkManager](/pentoo_images/networkmanager.png)
 
-BootNet: enable this so NetworkManager starts automatically; otherwise Wi‑Fi and networking won’t come up on boot.
-
-BootX: enable this to boot directly into the GUI instead of dropping into a console.
+- **BootNet**: enable this so NetworkManager starts automatically; otherwise Wi‑Fi and networking won’t come up on boot.
+- **BootX**: enable this to boot directly into the GUI instead of dropping into a console.
 
 By default, pentoo boots to the console, then you can boot into the GUI with the command:
 ```bash
