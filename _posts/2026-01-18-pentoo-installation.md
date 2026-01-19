@@ -21,7 +21,7 @@ Shoutout to the OG Null Byte ( author @distortion): https://null-byte.wonderhowt
 ## Download the Iso
 
 First you want to get the latest iso version from the official website: https://pentoo.ch/downloads
-![[pentoo_download.png]]
+![Pentoo download](/pentoo_images/pentoo_download.png)
 
 Select "Download from the main site (US)" and that should take you to this page: https://www.pentoo.ch/isos/
 
