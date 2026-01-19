@@ -55,11 +55,16 @@ You can also download directly from the terminal using `PowerShell`; since `wget
 wget https://www.pentoo.ch/isos/Release/Pentoo_Full_amd64_hardened/pentoo-full-amd64-hardened-2026.0_p20260118.iso -UseBasicParsing 
 ```
 
+For a more direct download if you don't know the full version name 
+```bash
+wget -r -l1 --no-parent -A .iso https://www.pentoo.ch/isos/Release/Pentoo_Full_amd64_hardened/
+```
+
 ## Flash the USB drive
 
 ### Using Rufus (Windows Only)
 
-Once you have the ISO, flash it to a USB drive. Use at least an 8 GB drive (16 GB is better).
+Once you have the ISO, flash it to a USB drive. Use at least an 8 GB USB drive (16 GB is better).
 
 Download Rufus from the [official site](https://rufus.ie/en/) 
 
@@ -70,11 +75,12 @@ Run Rufus and:
 - Select your USB drive under Device.
 - Select the Pentoo ISO under Boot selection.
 
-PS: You want to hit select to choose your pentoo iso file that you downloaded.
+>You want to hit `Select` to choose your pentoo iso file that you downloaded.
+{: .prompt-tip}
 
 ![Flashing with Rufus](/pentoo_images/flashing_with_rufus.png)
 
-Once you have selected and confirm that everything is good, hit Start.
+Once you have selected and confirmed that everything is good, hit Start.
 
 You will get this pop up. Make sure you select "Write in DD Image mode"
 
@@ -139,12 +145,12 @@ sudo dd if=pentoo-full-amd64-hardened-2026.0_p20260118.iso of=/dev/sdb bs=4M sta
 ```
 
 If you haven't downloaded the iso yet, you can download it directly from the terminal
+
 ```bash
 wget https://www.pentoo.ch/isos/Release/Pentoo_Full_amd64_hardened/pentoo-full-amd64-hardened-2026.0_p20260118.iso
 ```
 
 ```bash
-
 sudo dd if=pentoo-full-amd64-hardened-2026.0_p20260118.iso of=/dev/sdb bs=4M status=progress oflag=sync 
 
 6055708672 bytes (6.1 GB, 5.6 GiB) copied, 1288 s, 4.7 MB/s
@@ -154,6 +160,7 @@ sudo dd if=pentoo-full-amd64-hardened-2026.0_p20260118.iso of=/dev/sdb bs=4M sta
 ```
 
 After it's done writing the iso file to the usb drive, you can run `sync` once more just to make sure nothing was missed to avoid any corruption.
+
 ```bash
 sync
 ```
