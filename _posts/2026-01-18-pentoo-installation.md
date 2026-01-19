@@ -10,9 +10,13 @@ pin: true
 media_subpath: ''
 ---
 
-- Choose DD mode when flashing the USB drive with pentoo using rufus
-- If using a VM, make sure pentoo is set to (UEFI Boot) instead of BIOS
+ - Choose DD mode when flashing the USB drive with pentoo using rufus
+ - If using a VM, make sure your pentoo vm is set to (UEFI Boot) instead of BIOS
 
+> To change your vm firmware type from BIOS to UEFI on VMware:
+  - Select your pentoo VM
+  - Click on "Edit virtual machine settings" > Options > Advanced > *Firmware type* 
+{: .prompt-tip}
 
 What is Pentoo and who is behind it?: [Pentoo](https://pentoo.ch/about) 
 
