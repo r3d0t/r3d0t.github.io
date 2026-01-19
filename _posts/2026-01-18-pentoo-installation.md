@@ -30,6 +30,7 @@ Select **"Download from the main site (US)"** and that should take you to this p
 Before you do anything, read this [README](https://www.pentoo.ch/isos/README_which_version_do_I_want.txt)
 
 >The README file explains which architecture (amd64 vs x86) and edition (Full/Core, hardened) you should choose.
+{: .prompt-info }
 
 Then, Choose the **Release** directory
 
@@ -168,13 +169,16 @@ After you get everything right and boot from the USB drive on your Laptop, you s
 ![Pentoo home screen](/pentoo_images/pentoo_home_screen.png)
 
 Pretty Screen!
-> You do not get this pretty screen when using the core iso.
+
+>You do not get this pretty screen when using the core iso.
+{:. prompt-warning }
 
 From here, launch the **Pentoo Installer** on the desktop. If you get the security prompt, choose "Mark As Secure and Launch" and you will land here:
 
 ![Installer step 0](/pentoo_images/installation_0.png)
 
 > If you chose core instead of the full iso, you can run the installer from the terminal using ```sudo pentoo-installer```
+{:. prompt-tip }
 
 Set your time. Choose between Local Time and UTC, straight forward. Then choose the numbers corresponding on your area. 
 ![Setting time](/pentoo_images/setting_time.png)
