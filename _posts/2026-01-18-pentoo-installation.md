@@ -170,15 +170,15 @@ After you get everything right and boot from the USB drive on your Laptop, you s
 
 Pretty Screen!
 
->You do not get this pretty screen when using the core iso.
-{:. prompt-warning }
+>You do not get the pretty screen when using the core iso.
+{: .prompt-warning }
 
 From here, launch the **Pentoo Installer** on the desktop. If you get the security prompt, choose "Mark As Secure and Launch" and you will land here:
 
 ![Installer step 0](/pentoo_images/installation_0.png)
 
-> If you chose core instead of the full iso, you can run the installer from the terminal using ```sudo pentoo-installer```
-{:. prompt-tip }
+> If you chose core instead of the full iso, you can run the installer from the terminal using ```sudo pentoo-installer```.
+{: .prompt-tip }
 
 Set your time. Choose between Local Time and UTC, straight forward. Then choose the numbers corresponding on your area. 
 ![Setting time](/pentoo_images/setting_time.png)
