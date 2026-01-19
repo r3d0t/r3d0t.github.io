@@ -7,40 +7,45 @@ date: 2026-01-18 11:42:00 -0500
 categories: [pentoo, installation]
 tags: [hacking, pentoo, tool]
 pin: true
-media_subpath: '/posts/20260118'
+media_subpath: ''
 ---
 
 - Choose DD mode when flashing the USB drive with pentoo using rufus
 - If using a VM, make sure pentoo is set to (UEFI Boot) instead of BIOS
 
 
-What is Pentoo, Who is behind it?: https://pentoo.ch/about 
+What is Pentoo and who is behind it?: [Pentoo](https://pentoo.ch/about) 
 
-Shoutout to the OG Null Byte ( author @distortion): https://null-byte.wonderhowto.com/how-to/exploring-kali-linux-alternatives-getting-started-with-pentoo-for-advanced-software-installations-0192032/
+Shoutout to the OG Null Byte (author @distortion): [Null Byte](https://null-byte.wonderhowto.com/how-to/exploring-kali-linux-alternatives-getting-started-with-pentoo-for-advanced-software-installations-0192032/)
 
 ## Download the Iso
 
-First you want to get the latest iso version from the official website: https://pentoo.ch/downloads
+First you want to get the latest iso version from the [official website](https://pentoo.ch/downloads)
 ![Pentoo download](/pentoo_images/pentoo_download.png)
 
-Select "Download from the main site (US)" and that should take you to this page: https://www.pentoo.ch/isos/
+Select **"Download from the main site (US)"** and that should take you to this page: [https://www.pentoo.ch/isos/](https://www.pentoo.ch/isos/)
 
 ![Index of ISOs](/pentoo_images/index_of_isos.png)
 
-Choose the Release directory
+Choose the **Release** directory
+
 ![Release directory](/pentoo_images/Release_Directory.png)
 
-From here, you want to get the "[Pentoo_Full_amd64_hardened/](https://www.pentoo.ch/isos/Release/Pentoo_Full_amd64_hardened/)"   
+<!-- From here, go into "[Pentoo_Full_amd64_hardened/](https://www.pentoo.ch/isos/Release/Pentoo_Full_amd64_hardened/)" -->
 
-If you are not sure what version to get or you are confused about each version, go back and read this: https://www.pentoo.ch/isos/README_which_version_do_I_want.txt 
+From here, go into:
 
-In the directory, choose the `.iso` file, the first one. And it should download on your machine
+- [`Pentoo_Full_amd64_hardened/`](https://www.pentoo.ch/isos/Release/Pentoo_Full_amd64_hardened/)
+
+If you’re not sure which version you want, read this [README](https://www.pentoo.ch/isos/README_which_version_do_I_want.txt)  
+
+In that directory, choose the first `.iso` file and download it.
 
 ![Pentoo ISO](/pentoo_images/pentoo_iso.png)
 
-If for some reasons the download fails, try cleaning up your browser cache and try downloading again. 
+If the download fails, try cleaning your browser cache and downloading again. 
 
-Or you can simply download it from the terminal. Use Powershell, since `wget` isn't a command prompt utility.
+You can also download directly from the terminal using `PowerShell`; since `wget` isn't a command prompt utility.
 ```bash
 wget https://www.pentoo.ch/isos/Release/Pentoo_Full_amd64_hardened/pentoo-full-amd64-hardened-2026.0_p20260118.iso -UseBasicParsing 
 ```
@@ -49,13 +54,16 @@ wget https://www.pentoo.ch/isos/Release/Pentoo_Full_amd64_hardened/pentoo-full-a
 
 ### Using Rufus (Windows Only)
 
-Once you get the iso file, you want to flash it to the usb drive. Get a usb drive of at least 8gb, 16gb is even better.
+Once you have the ISO, flash it to a USB drive. Use at least an 8 GB drive (16 GB is better).
 
-Download Rufus from the official site: https://rufus.ie/en/ 
+Download Rufus from the [official site](https://rufus.ie/en/) 
 
 ![Download Rufus](/pentoo_images/download_rufus.png)
 
-Now run it. Make sure you select your USB drive under "Device" and the iso under "Boot selection"
+Run Rufus and:
+
+- Select your USB drive under Device.
+- Select the Pentoo ISO under Boot selection.
 
 PS: You want to hit select to choose your pentoo iso file that you downloaded.
 
@@ -73,7 +81,7 @@ And then click OK. It should take a few minutes (about 15 min), and it will let 
 
 ### Using balenaEtcher (Windows or Linux)
 
-Download it from the official website: https://etcher.balena.io/
+Download it from the [official website](https://etcher.balena.io/)
 
 Run it, and select the pentoo iso file and make sure it's the usb device you want to use, then hit "Flash"
 
@@ -87,11 +95,11 @@ That's it. Pretty simple
 
 To do this from the terminal, use the `dd` command to write the iso directly to the USB device.
 
-You can check and confirm your USB device. For that, you can use `lsblk` or `fdisk -l`
-```console
+You can check and confirm your USB device. Use `lsblk` or `fdisk -l`
+```shell
 sudo fdisk -l 
 
-** Shorten Outpout **
+[...]
 
 Disk /dev/sdb: 14.46 GiB, 15525216256 bytes, 30322688 sectors
 Disk model: USB 2.0 FD      
@@ -101,12 +109,12 @@ I/O size (minimum/optimal): 512 bytes / 512 bytes
 Disklabel type: gpt
 Disk identifier: 0A6A2663-A2C2-4432-B806-AB5C2904DE0B
 
-** Shorten Output **
+[...]
 ```
 
 ![fdisk output](/pentoo_images/fdisk.png)
 
-```console
+```bash
 lsblk           
 
 NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
@@ -117,21 +125,20 @@ sdb      8:16   1 14.5G  0 disk
 ├─sdb2   8:18   1  2.8M  0 part 
 ├─sdb3   8:19   1  5.6G  0 part 
 └─sdb4   8:20   1  300K  0 part 
-
 ```
 
 ![lsblk output](/pentoo_images/lsblk.png)
 
-```console
+```bash
 sudo dd if=pentoo-full-amd64-hardened-2026.0_p20260118.iso of=/dev/sdb bs=4M status=progress oflag=sync
 ```
 
-Since we are on the terminal anyway, we could download the iso directly from the terminal
-```console
+If you haven't downloaded the iso yet, you can download it directly from the terminal
+```bash
 wget https://www.pentoo.ch/isos/Release/Pentoo_Full_amd64_hardened/pentoo-full-amd64-hardened-2026.0_p20260118.iso
 ```
 
-```console
+```bash
 
 sudo dd if=pentoo-full-amd64-hardened-2026.0_p20260118.iso of=/dev/sdb bs=4M status=progress oflag=sync 
 
@@ -142,15 +149,15 @@ sudo dd if=pentoo-full-amd64-hardened-2026.0_p20260118.iso of=/dev/sdb bs=4M sta
 ```
 
 After it's done writing the iso file to the usb drive, you can run `sync` once more just to make sure nothing was missed to avoid any corruption.
-```console
+```bash
 sync
 ```
 
-Now, you can eject the usb device safely if it was mounted
-```console
+Now, you can eject the usb device safely, if it was mounted
+```bash
 umount /dev/sdb
 ```
-
+Otherwise, you can just unplug the drive.
 
 ## The Installation
 
@@ -159,7 +166,7 @@ After you get everything right and boot from the USB drive on your Laptop, you s
 
 Pretty Screen!
 
-From here, you want to launch the Pentoo Installer from your screen. If you get the pop up, you can choose "Mark As Secure and Launch" and you will land here.
+From here, launch the **Pentoo Installer** on the desktop. If you get the security prompt, choose "Mark As Secure and Launch" and you will land here:
 
 ![Installer step 0](/pentoo_images/installation_0.png)
 
@@ -192,12 +199,12 @@ If you don't set the root password, you can just run root commands without any p
 The Boot Options "Boot0pts"  configuration is the most interesting
 ![NetworkManager](/pentoo_images/networkmanager.png)
 
-Select `BootNet` to turn Network Manager on, otherwise, you won't be able to connect to your wifi or any network without manually turning Network Manager on at boot every time.
+BootNet: enable this so NetworkManager starts automatically; otherwise Wi‑Fi and networking won’t come up on boot.
 
-Select BootX to have pentoo boot directly into the GUI (X) instead of the terminal/console. 
+BootX: enable this to boot directly into the GUI instead of dropping into a console.
 
 By default, pentoo boots to the console, then you can boot into the GUI with the command:
-```console
+```bash
 startx
 ```
 
@@ -215,6 +222,7 @@ And that's all.
 
 Pentoo is Open Source. If you have any questions or run into any issue, don't hesitate to join the Discord: [https://discord.gg/5yhY9bg](https://discord.gg/5yhY9bg) 
 
-Other ways to reach out are listed on the main page: https://www.pentoo.ch/
+Other ways to reach out are listed on the [official website](https://www.pentoo.ch)
+
 
 
