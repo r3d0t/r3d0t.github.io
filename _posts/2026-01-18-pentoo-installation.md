@@ -41,7 +41,7 @@ From here, select the latest Pentoo_Full_amd64_hardened ISO unless you specifica
 
 - [`Pentoo_Full_amd64_hardened/`](https://www.pentoo.ch/isos/Release/Pentoo_Full_amd64_hardened/)
 
-> This variant is usually the best choice for a typical 64‑bit installation unless you know you need a different image. 
+> The `Full iso` variant is usually the best choice for a typical 64‑bit installation unless you know you need a different image. 
 {: .prompt-info}
 
 In that directory, choose the first `.iso` file and download it.
