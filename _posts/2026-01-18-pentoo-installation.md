@@ -71,7 +71,6 @@ Download Rufus from the [official site](https://rufus.ie/en/)
 ![Download Rufus](/pentoo_images/download_rufus.png)
 
 Run Rufus and:
-
 - Select your USB drive under Device.
 - Select the Pentoo ISO under Boot selection.
 
@@ -140,15 +139,7 @@ sdb      8:16   1 14.5G  0 disk
 
 ![lsblk output](/pentoo_images/lsblk.png)
 
-```bash
-sudo dd if=pentoo-full-amd64-hardened-2026.0_p20260118.iso of=/dev/sdb bs=4M status=progress oflag=sync
-```
-
-If you haven't downloaded the iso yet, you can download it directly from the terminal
-
-```bash
-wget https://www.pentoo.ch/isos/Release/Pentoo_Full_amd64_hardened/pentoo-full-amd64-hardened-2026.0_p20260118.iso
-```
+Now that you know your drive name, write the iso to the usb drive using `dd`:
 
 ```bash
 sudo dd if=pentoo-full-amd64-hardened-2026.0_p20260118.iso of=/dev/sdb bs=4M status=progress oflag=sync 
