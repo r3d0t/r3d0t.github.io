@@ -30,7 +30,7 @@ Select **"Download from the main site (US)"** and that should take you to this p
 Before you do anything, read this [README](https://www.pentoo.ch/isos/README_which_version_do_I_want.txt)
 
 >The README file explains which architecture (amd64 vs x86) and edition (Full/Core, hardened) you should choose.
-{: .prompt-info }
+{: .prompt-info}
 
 Then, Choose the **Release** directory
 
@@ -42,6 +42,7 @@ From here, select the latest Pentoo_Full_amd64_hardened ISO unless you specifica
 - [`Pentoo_Full_amd64_hardened/`](https://www.pentoo.ch/isos/Release/Pentoo_Full_amd64_hardened/)
 
 > This variant is usually the best choice for a typical 64‑bit installation unless you know you need a different image. 
+{: .prompt-info}
 
 In that directory, choose the first `.iso` file and download it.
 
@@ -161,7 +162,7 @@ Now, you can eject the usb device safely, if it was mounted
 ```bash
 umount /dev/sdb
 ```
-Otherwise, you can just unplug the drive.
+Otherwise, you can just unplug the USB drive.
 
 ## The Installation
 
