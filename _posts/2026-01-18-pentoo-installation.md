@@ -27,7 +27,7 @@ Select **"Download from the main site (US)"** and that should take you to this p
 
 ![Index of ISOs](/pentoo_images/index_of_isos.png)
 
-Before you do anything, read the [README](https://www.pentoo.ch/isos/README_which_version_do_I_want.txt)
+Before you do anything, read this [README](https://www.pentoo.ch/isos/README_which_version_do_I_want.txt)
 
 >The README file explains which architecture (amd64 vs x86) and edition (Full/Core, hardened) you should choose.
 
