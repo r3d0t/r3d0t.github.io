@@ -5,7 +5,7 @@ icon: fas fa-user-secret
 order: 4
 ---
 
-r3d0t is an offensive security researcher focused on wireless security, software-defined radio, application security, and red teaming.
+r3d0t is an offensive security researcher focused on wireless security, software-defined radio, and red teaming.
 
 <!-- The line below is a comment -->
 
