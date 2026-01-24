@@ -8,6 +8,7 @@ categories: [Pentoo, Installation]
 tags: [hacking, pentoo, tool]
 pin: true
 media_subpath: ''
+comments: true
 ---
 
  - Choose DD mode when flashing the USB drive with pentoo using rufus
