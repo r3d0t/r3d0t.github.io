@@ -1,7 +1,7 @@
 ---
 title: Sliver C2 Pivoting Set Up
 description: >-
- Using Sliver C2 for Network Pivoting Through a Compromised Host”
+ Using Sliver C2 for Network Pivoting Through a Compromised Host
 author: r3d0t
 date: 2026-01-26 22:03:00 -0500
 categories: [Red Team, Pivoting with Sliver]
