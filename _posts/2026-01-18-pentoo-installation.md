@@ -9,7 +9,7 @@ tags: [hacking, pentoo, tool]
 pin: true
 media_subpath: ''
 comments: true
-image: /pentoo_images/pentoo_2.png
+image: /pentoo_images/pentoo_cropped.png
 ---
  - Choose DD mode when flashing the USB drive with pentoo using rufus
  - If using a VM, make sure your pentoo vm is set to (UEFI Boot) instead of BIOS
