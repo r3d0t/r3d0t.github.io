@@ -122,6 +122,7 @@ use ce3077ac
 
 
 We are now connected to Ubuntu A as the user hacker 
+
 ![ifconfig.png](/Sliver_images/ifconfig.png)
 
 ## Understanding the Network Topology 
