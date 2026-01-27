@@ -117,9 +117,7 @@ We can see the ID `ce3077ac` which is attributed to the callback from Host A. Le
 ```bash
 use ce3077ac
 ```
-
 ![Using_sessions.png](/Sliver_images/Using_sessions.png)
-
 
 We are now connected to Ubuntu A as the user hacker 
 
