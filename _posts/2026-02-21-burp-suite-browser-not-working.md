@@ -44,6 +44,7 @@ In my case, the latest version was
 /home/kali/.BurpSuite/burpbrowser/142.0.7444.175/chrome-sandbox
 ```
 
+You can go to the directory and list all the versions there directly:
 
 ```bash
 cd /home/kali/.BurpSuite/burpbrowser && ls
@@ -60,7 +61,6 @@ rm -rf 126.0.6478.126 137.0.7151.68 141.0.7390.65 142.0.7444.134
 ### 2. Fix owner and permissions
 
 ```bash
-# Replace the /path/to/chrome-sandbox with the actual path
 sudo chown root:root /path/to/chrome-sandbox
 sudo chmod 4755 /path/to/chrome-sandbox
 ```
