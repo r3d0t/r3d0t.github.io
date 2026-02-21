@@ -4,7 +4,7 @@ description: >-
   A guide to help install pentoo on a machine
 author: r3d0t
 date: 2026-01-18 11:42:00 -0500
-categories: [Pentoo, Installation]
+categories: [Software Defined Radio, Pentoo Installation]
 tags: [hacking, pentoo, tool]
 pin: true
 media_subpath: ''
