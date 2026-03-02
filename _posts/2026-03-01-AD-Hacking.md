@@ -49,11 +49,11 @@ netexec smb 192.168.146.0/24
 ![netexec to get more info](/Secura%20Images/netexec%20to%20get%20more%20info.png)
 
 
-> If you hit a netexec error like this, do exactly what it says. You don’t need to keep the old DB. Remove it and rerun netexec so it can rebuild:
-> [-] Schema mismatch detected for table 'shares' in protocol 'SMB'. 
-> [-] This is probably because a newer version of nxc is being run on an old DB schema.   
-> [-] Optionally save the old DB data (`cp /home/kali/.nxc/workspaces/default/smb.db ~/nxc_smb.bak`).  
-> [-] Then remove the SMB DB (`rm -f /home/kali/.nxc/workspaces/default/smb.db`) and run nxc to initialize the new DB. 
+> If you hit a netexec error like this, do exactly what it says. You don’t need to keep the old DB. Remove it and rerun netexec so it can rebuild:  
+>[-] Schema mismatch detected for table 'shares' in protocol 'SMB'.  
+>[-] This is probably because a newer version of nxc is being run on an old DB schema.     
+>[-] Optionally save the old DB data (`cp /home/kali/.nxc/workspaces/default/smb.db ~/nxc_smb.bak`).  
+>[-] Then remove the SMB DB (`rm -f /home/kali/.nxc/workspaces/default/smb.db`) and run nxc to initialize the new DB.   
 {: .prompt-tip}
 
 Nice! From the Output, we learn:
