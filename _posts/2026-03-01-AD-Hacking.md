@@ -30,7 +30,7 @@ We also know that these credentials are valid on 192.168.146.95, which gives us 
 >[-]Enumerate an AD environment and identify the DC with netexec and Nmap.  
 >[-]Chain local credential hunting, RDP config files, and SQL access into domain admin.  
 >[-]Abuse `SeImpersonatePrivilege` with PrintSpoofer on Windows Server 2016 to get a SYSTEM shell. 
-{: .prompt-tip}
+{: .prompt-info}
 
 ## Host Discovery
 
