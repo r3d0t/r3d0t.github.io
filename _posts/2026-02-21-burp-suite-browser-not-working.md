@@ -6,7 +6,7 @@ author: r3d0t
 date: 2026-02-21 16:03:00 -0500
 categories: [Application Security, Burp Suite, Browser Issue]
 tags: [burp suite, chromium, linux]
-pin: true
+pin: false
 media_subpath: ''
 comments: true
 image: /Burp_Suite/burp_suite_icon.png
