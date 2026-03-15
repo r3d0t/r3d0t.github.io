@@ -55,7 +55,7 @@ At first, I wasn’t even sad about failing. I was curious. I wanted to understa
 
 Seeing the solution laid out hurt in a very specific way. I felt that if I had known this one extra piece during the exam or if I had just a few more hours, I probably would have passed.
 
-That’s when the emotions caught up. The disappointment and the frsutration.
+That’s when the emotions caught up. The disappointment and the frutration.
 
 I was disappointed, but I also knew this: If I took the exam again, I had a very real shot at passing.
 
