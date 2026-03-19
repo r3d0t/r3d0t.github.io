@@ -59,7 +59,7 @@ That’s when the emotions caught up. The disappointment and the frutration.
 
 I was disappointed, but I also knew this: If I took the exam again, I had a very real shot at passing.
 
-# The OSCP Exam – Round 2 (Rematch)
+## The OSCP Exam – Round 2 (Rematch)
 
 For my second attempt, I was a bit more relaxed. The fear of the unknown was gone. I knew what the proctoring felt like, how quickly time moved, and where I tend to get anxious.
 
