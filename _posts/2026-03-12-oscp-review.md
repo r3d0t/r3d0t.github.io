@@ -31,7 +31,7 @@ I was pretty new to the whole proctoring experience, so that made me anxious. Ha
 
 The pre-exam checks went smoothly overall, except: the proctor noticed TeamViewer installed on my computer. It wasn’t running, but that didn’t matter, I had to uninstall it before I could start the exam. So, I did.
 
-Once I finally got into the exam, things settled. I worked through the machines, starting with the Active Directory Set. At some point, I had 50 points with several hours left on the clock. I only needed 20 more points to pass the exma.
+Once I finally got into the exam, things settled. I worked through the machines, starting with the Active Directory Set. At some point, I had 50 points with several hours left on the clock. I only needed 20 more points to pass the exam.
 
 I could go after the Domain Controller’s (DC) flag for 20 points, or I could try to squeeze 2 × 10 points out of the standalone machines by getting the missing flags there.
 
@@ -75,7 +75,7 @@ The machines I’d hoped to “redeem,” the ones I wanted a rematch with, didn
 
 This set of machines felt tougher. Not impossibly hard, but less straight forward. I followed the same methodology: enumerate, document, pivot, reassess.
 
-By sometime between 10 and 11 PM, I had 60 points. It was deja vu with 10 more points.
+By sometime between 10 and 11 PM, I had 60 points. It was deja vu with 10 more points left.
 
 I was working on a standalone box that looked promising. I had some credentials that should have worked but didn’t.
 
