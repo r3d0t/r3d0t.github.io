@@ -120,7 +120,7 @@ The [Hacker Blueprint's](https://www.youtube.com/watch?v=ey_GeabfQpg&list=PLM164
 
 Breaks are important. I took a lot more breaks during my second attempt compared to my first attempt. I used this [online clock](https://vclock.com/) to set an alarm reminding (forcing) myself to take breaks.
 
-When pivoting with chisel and proxychains, always check your tunnel when a command suddenly stops working. Sometimes the tunnel just dies. People recommending ligolo-ng are right. What I like to do is keep multiple terminal windows open (I had around eight), with two dedicated to the chisel client and server so I can see instantly when the tunnel breaks.
+When pivoting with chisel and proxychains, always check your tunnel when a command suddenly stops working. Sometimes the tunnel just dies. People recommending ligolo-ng are right. What I like to do is keep multiple terminal windows open (I had around eight), with two dedicated to the chisel client and server so I can see instantly when the tunnel breaks. You could also try [zellij](https://zellij.dev) which a friend recommended recently.
 
 As you work on the machines, take screenshots and save them in obsidian. I had 2 screens I was working on, my Kali VM on one, and my notes, obsidian, and everything else on the other screen. That helped.
 
