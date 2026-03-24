@@ -9,7 +9,7 @@ tags: [oscp, ethical hacking, certificates]
 pin: true
 media_subpath: ''
 comments: true
-image: /Offsec.jpg
+image: /post_images/Offsec.jpg
 ---
 
 I passed the OffSec Certified Professional (OSCP) in March 2026, on my second attempt. My first attempt was in December 2025.
