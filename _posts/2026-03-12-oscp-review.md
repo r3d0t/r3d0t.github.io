@@ -5,7 +5,7 @@ description: >-
 author: r3d0t
 date: 2026-03-12 10:41:00 -0500
 categories: [Blog, OSCP]
-tags: [oscp, ethical hacking, certificates]
+tags: [oscp, ethical hacking, certificates, penetration testing, pentesting, penetration tester, oscp review]
 pin: true
 media_subpath: ''
 comments: true
