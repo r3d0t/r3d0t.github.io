@@ -16,10 +16,10 @@ timezone: America/New_York
 
 title: r3d0t h4ck # the main title
 
-tagline: someone who enjoys art and computers in all form and shape # it will display as the subtitle
+tagline: Do you fancy the art and the craft ? # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  just a person who enjoys art and computers in any shape and form.
+  A security researcher blending art and hacking
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
