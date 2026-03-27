@@ -3,7 +3,7 @@ title: PNPT Exam Review
 description: >-
  Reviewing the PNPT Exam
 author: r3d0t
-date: 2026-03-27 10:41:00 -0500
+date: 2026-03-27 18:15:00 -0500
 categories: [Blog, PNPT]
 tags: [oscp, ethical hacking, certificates, penetration testing, pentesting, penetration tester, pnpt review]
 pin: true
