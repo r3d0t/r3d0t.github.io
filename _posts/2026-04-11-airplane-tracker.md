@@ -86,10 +86,10 @@ The aircraft is currently at a relatively low altitude (10,800 ft) compared to t
 
 Track is expressed in degrees:
 
-- **0°** = flying due north
-- **90°** = flying due east
-- **180°** = flying due south
-- **270°** = flying due west
+- **0°** = flying north
+- **90°** = flying east
+- **180°** = flying south
+- **270°** = flying west
 
 Another way of explaining this:
 
