@@ -1,7 +1,7 @@
 ---
 title: Tracking Aircraft with Dump1090
-description: >-
-  
+description: >- 
+ Monitoring and Decoding ADS-B Aircraft Signals with Software-Defined Radio  
 author: r3d0t
 date: 2026-04-11 18:15:00 -0500
 categories: [Software Defined Radio, Aircraft Tracker]
