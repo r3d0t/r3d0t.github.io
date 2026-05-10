@@ -1,7 +1,7 @@
 ---
 title: Framework 13 Screen Freezing Fix
 description: >- 
- Fixing an GPU hang issue on the framework 13
+ Fixing a GPU hang issue on the framework 13
 author: r3d0t
 date: 2026-05-10 10:54:00 -0400
 categories: [Troubleshooting, Framework]
