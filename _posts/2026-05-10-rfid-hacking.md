@@ -57,7 +57,7 @@ Now, we are ready to start.
 
 We will start by doing something simple, which is clone a hotel key card. 
 
-We can look inside the card with a flashlight to determine what kind of RFID Card it is (HF/LF). ![See it here](https://youtu.be/cSZE3buFyi4?t=324)
+We can look inside the card with a flashlight to determine what kind of RFID Card it is (HF/LF). [See it here](https://youtu.be/cSZE3buFyi4?t=324)
 
 > We can look inside a card that is "white" with a flash light. But if a card has paint over it or something,it may be hard or even impossible to see the antenna with a flashlight :(
 
