@@ -1,7 +1,7 @@
 ---
-title: RFID Cards Hacking (Part 1)
+title: Practical RFID Recon with Proxmark3 (Part 1)
 description: >- 
- Reading and Cloning a Hotel Card
+ Analyzing and Cloning Hotel RFID Access Card
 author: r3d0t
 date: 2026-05-12 21:30:00 -0400
 categories: [Radio Frequency, RFID Cards]
