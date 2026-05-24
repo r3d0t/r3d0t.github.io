@@ -9,7 +9,7 @@ tags: [oscp, pnpt, ethical hacking, certificates, penetration testing, oscp revi
 pin: false
 media_subpath: ''
 comments: true
-image: /post_images/steins-gate.jpg
+image: /assets/img/posts/reviews/steins-gate.jpg
 ---
 
 As someone who has passed both the [PNPT](https://certifications.tcm-sec.com/pnpt/) and the [OSCP](https://www.offsec.com/courses/pen-200/), I wanted to share my perspective on how they compare. Both are strong certifications for anyone interested in penetration testing, but they are designed differently and reward slightly different strengths.

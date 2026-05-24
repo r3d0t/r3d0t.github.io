@@ -9,7 +9,7 @@ tags: [burp suite, chromium, linux]
 pin: false
 media_subpath: ''
 comments: true
-image: /Burp_Suite/burp_suite_icon.png
+image: /assets/img/posts/burp-suite/burp_suite_icon.png
 ---
 
 I ran into an issue where Burp Suite’s embedded Chromium browser wouldn’t launch on Linux. 
@@ -36,7 +36,7 @@ find ~ -type f -name "chrome-sandbox"
 
 You’ll likely see multiple versions. For example:
 
-![listing_versions](/Burp_Suite/listing_versions.png)
+![listing_versions](/assets/img/posts/burp-suite/listing_versions.png)
 
 In my case, the latest version was 
 
@@ -49,7 +49,7 @@ You can go to the directory and list all the versions there directly:
 ```bash
 cd /home/kali/.BurpSuite/burpbrowser && ls
 ```
-![checking_versions](/Burp_Suite/checking_versions.png)
+![checking_versions](/assets/img/posts/burp-suite/checking_versions.png)
 
 Then remove the ones you don’t want:
 

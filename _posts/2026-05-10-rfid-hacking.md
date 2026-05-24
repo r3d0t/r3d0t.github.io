@@ -9,7 +9,7 @@ tags: [radio frequency, rfid, rfid hacking, ethical hacking, linux, pentoo, prox
 pin: true
 media_subpath: ''
 comments: true
-image: /RFID_hacking_images/RFID_Hacking.png
+image: /assets/img/posts/rfid-hacking/RFID_Hacking.png
 ---
 
 ### Toolkit
@@ -24,7 +24,7 @@ For this we will use:
 > proxmark3-easy is essentially a less expensive proxmark3 that uses lower quality hardware compared to the original.
 {: .prompt-info}
 
-![proxmark3-easy](/RFID_hacking_images/proxmark3_device.jpg)
+![proxmark3-easy](/assets/img/posts/rfid-hacking/proxmark3_device.jpg)
 
 ### Getting Started
 
@@ -34,7 +34,7 @@ Let's start by plugging in our tool and launching it.
 pm3
 ```
 
-![PM3](/RFID_hacking_images/Proxmark3_launched.png)
+![PM3](/assets/img/posts/rfid-hacking/Proxmark3_launched.png)
 
 > Since I'm using pentoo, proxmark3 is already installed. On any other linux distro or windows, you have to install it yourself. This is another great advantage of using pentoo :)
 {: .prompt-tip}
@@ -47,7 +47,7 @@ The next thing we should do is measure our antenna performance to make sure our 
 ```bash
 hw tune
 ```
-![hw_tune](/RFID_hacking_images/Proxmark3_tune.png)
+![hw_tune](/assets/img/posts/rfid-hacking/Proxmark3_tune.png)
 
 Now, we are ready to start.
 
@@ -66,7 +66,7 @@ Usually, if we don't know what type of card (HF/LF) an RFID card is, we can simp
 ```bash
 auto
 ```
-![pm3_auto](/RFID_hacking_images/Proxmark3_auto.png)
+![pm3_auto](/assets/img/posts/rfid-hacking/Proxmark3_auto.png)
 
 We can see that it tries `lf search` first and didn't get anything. That means it is not a LF card.
 
@@ -77,7 +77,7 @@ If we try the HINT command provided, we should be able to get more information o
 ```bash
 hf mf info
 ```
-![pm3_mfinfo](/RFID_hacking_images/Proxmark3_mf_info.png)
+![pm3_mfinfo](/assets/img/posts/rfid-hacking/Proxmark3_mf_info.png)
 
 This looks so beautiful. A couple of things to note:
 
@@ -113,7 +113,7 @@ There is a Hint command again at the bottom, let's try it!
 ```bash
 script run fm11rf08s_recovery.py
 ```
-![pythonscript](/RFID_hacking_images/Proxmark3_running_pythonscript.png)
+![pythonscript](/assets/img/posts/rfid-hacking/Proxmark3_running_pythonscript.png)
 As we can see from the output, all the sectors from 000-015 use the same factory default keys for A and B, except Sector 032 which was easy to get the key. It's fair to assume that sector 032 is where there is actual data, hence why the key isn't default. 
 
 #### Cloning the card
@@ -123,7 +123,7 @@ First, we need to read our blank hf card and indentify if it has any magic capab
 ```bash
 hf search
 ```
-![blank_read](/RFID_hacking_images/blank_card_hf_search.png)
+![blank_read](/assets/img/posts/rfid-hacking/blank_card_hf_search.png)
 
 Then, dump our hotel card. but since we already have a dump from running our python script, we are good! 
 
@@ -141,7 +141,7 @@ In Block 0: `43B9FAB1B108040004C8C181C11B3E90`
 - Bytes 6 & 7: `04 00` is the ATQA (Answer To Request)
 - Bytes 8, 9, 10, 11, 12, 13, 14 & 15: `04 C8 C1 81 C1 1B 3E 90` is the manufacturer data.
 
-![write_block0](/RFID_hacking_images/Writing_block0.png)
+![write_block0](/assets/img/posts/rfid-hacking/Writing_block0.png)
 
 We can run the hint command to verify block 0 was successfully written to our blank card.
 
@@ -149,14 +149,14 @@ We can run the hint command to verify block 0 was successfully written to our bl
 hf mf rdbl --blk 0
 ```
 
-![verify_block0](/RFID_hacking_images/verifying_block0.png)
+![verify_block0](/assets/img/posts/rfid-hacking/verifying_block0.png)
 
 Now, let's restore the full dump we got from our hotel card onto the blank card (clone).
 
 ```bash
 hf mf restore -f hf-mf-43B9FAB1-dump-003.bin
 ```
-![write_dump](/RFID_hacking_images/writing_dump.png)
+![write_dump](/assets/img/posts/rfid-hacking/writing_dump.png)
 
 Looks like everything went smoothly. So, now if we check our clone, it should have the same information as our hotel card (the original).
 
@@ -165,6 +165,6 @@ hf search
 hf mf info
 ```
 
-![confirm_clone](/RFID_hacking_images/confirming_clone_data.png)
+![confirm_clone](/assets/img/posts/rfid-hacking/confirming_clone_data.png)
 
 And Voila! We have successfully cloned our hotel card. 

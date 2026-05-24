@@ -9,7 +9,7 @@ tags: [hacking, pentoo, tool]
 pin: true
 media_subpath: ''
 comments: true
-image: /pentoo_images/pentoo_cropped.png
+image: /assets/img/posts/pentoo-installation/pentoo_cropped.png
 ---
  - Choose DD mode when flashing the USB drive with pentoo using rufus
  - If using a VM, make sure your pentoo vm is set to (UEFI Boot) instead of BIOS
@@ -26,11 +26,11 @@ Shoutout to the OG Null Byte (author @distortion): [Null Byte](https://null-byte
 ## Download the Iso
 
 First you want to get the latest iso version from the [official website](https://pentoo.ch/downloads)
-![Pentoo download](/pentoo_images/pentoo_download.png)
+![Pentoo download](/assets/img/posts/pentoo-installation/pentoo_download.png)
 
 Select **"Download from the main site (US)"** and that should take you to this page: [https://www.pentoo.ch/isos/](https://www.pentoo.ch/isos/)
 
-![Index of ISOs](/pentoo_images/index_of_isos.png)
+![Index of ISOs](/assets/img/posts/pentoo-installation/index_of_isos.png)
 
 Before you do anything, read this [README](https://www.pentoo.ch/isos/README_which_version_do_I_want.txt)
 
@@ -39,7 +39,7 @@ Before you do anything, read this [README](https://www.pentoo.ch/isos/README_whi
 
 Then, Choose the **Release** directory
 
-![Release directory](/pentoo_images/Release_Directory.png)
+![Release directory](/assets/img/posts/pentoo-installation/Release_Directory.png)
 
 
 From here, select the latest Pentoo_Full_amd64_hardened ISO unless you specifically need another variant.
@@ -51,7 +51,7 @@ From here, select the latest Pentoo_Full_amd64_hardened ISO unless you specifica
 
 In that directory, choose the first `.iso` file and download it.
 
-![Pentoo ISO](/pentoo_images/pentoo_iso.png)
+![Pentoo ISO](/assets/img/posts/pentoo-installation/pentoo_iso.png)
 
 If the download fails, try cleaning your browser cache and downloading again. 
 
@@ -73,7 +73,7 @@ Once you have the ISO, flash it to a USB drive. Use at least an 8 GB USB drive (
 
 Download Rufus from the [official site](https://rufus.ie/en/) 
 
-![Download Rufus](/pentoo_images/download_rufus.png)
+![Download Rufus](/assets/img/posts/pentoo-installation/download_rufus.png)
 
 Run Rufus and:
 - Select your USB drive under Device.
@@ -82,17 +82,17 @@ Run Rufus and:
 >You want to hit `Select` to choose your pentoo iso file that you downloaded.
 {: .prompt-tip}
 
-![Flashing with Rufus](/pentoo_images/flashing_with_rufus.png)
+![Flashing with Rufus](/assets/img/posts/pentoo-installation/flashing_with_rufus.png)
 
 Once you have selected and confirmed that everything is good, hit Start.
 
 You will get this pop up. Make sure you select "Write in DD Image mode"
 
-![Rufus DD mode](/pentoo_images/rufus_dd_mode.png)
+![Rufus DD mode](/assets/img/posts/pentoo-installation/rufus_dd_mode.png)
 
 And then click OK. It should take a few minutes (about 15 min), and it will let you know when it's done (Ready)
 
-![Rufus ready](/pentoo_images/rufus_ready.png)
+![Rufus ready](/assets/img/posts/pentoo-installation/rufus_ready.png)
 
 ### Using balenaEtcher (Windows or Linux)
 
@@ -100,7 +100,7 @@ Download it from the [official website](https://etcher.balena.io/)
 
 Run it, and select the pentoo iso file and make sure it's the usb device you want to use, then hit "Flash"
 
-![Flashing with balenaEtcher](/pentoo_images/flashing_with_balena.png)
+![Flashing with balenaEtcher](/assets/img/posts/pentoo-installation/flashing_with_balena.png)
 
 That's it. Pretty simple
 
@@ -127,7 +127,7 @@ Disk identifier: 0A6A2663-A2C2-4432-B806-AB5C2904DE0B
 [...]
 ```
 
-![fdisk output](/pentoo_images/fdisk.png)
+![fdisk output](/assets/img/posts/pentoo-installation/fdisk.png)
 
 ```bash
 lsblk           
@@ -142,7 +142,7 @@ sdb      8:16   1 14.5G  0 disk
 └─sdb4   8:20   1  300K  0 part 
 ```
 
-![lsblk output](/pentoo_images/lsblk.png)
+![lsblk output](/assets/img/posts/pentoo-installation/lsblk.png)
 
 Now that you know your drive name, write the iso to the usb drive using `dd`:
 
@@ -170,7 +170,7 @@ Otherwise, you can just unplug the USB drive.
 ## The Installation
 
 After you get everything right and boot from the USB drive on your Laptop, you should get here
-![Pentoo home screen](/pentoo_images/pentoo_home_screen.png)
+![Pentoo home screen](/assets/img/posts/pentoo-installation/pentoo_home_screen.png)
 
 Pretty Screen!
 
@@ -179,39 +179,39 @@ Pretty Screen!
 
 From here, launch the **Pentoo Installer** on the desktop. If you get the security prompt, choose "Mark As Secure and Launch" and you will land here:
 
-![Installer step 0](/pentoo_images/installation_0.png)
+![Installer step 0](/assets/img/posts/pentoo-installation/installation_0.png)
 
 > If you chose core instead of the full iso, you can run the installer from the terminal using ```sudo pentoo-installer```.
 {: .prompt-tip }
 
 Set your time. Choose between Local Time and UTC, straight forward. Then choose the numbers corresponding on your area. 
-![Setting time](/pentoo_images/setting_time.png)
+![Setting time](/assets/img/posts/pentoo-installation/setting_time.png)
 
 After that, there is the next step in the installation. 
 
-![Drive partition](/pentoo_images/drive_partition.png)
+![Drive partition](/assets/img/posts/pentoo-installation/drive_partition.png)
 
 Unless you are an expert and you know what you are doing, choose the first option 
 
 When you are done, you will see a third option pop up. Select it to end this step 
-![Drive partition done](/pentoo_images/drive_partition_done.png)
+![Drive partition done](/assets/img/posts/pentoo-installation/drive_partition_done.png)
 
 The next step will be "Copy the distribution" which is straightforward. You will get this screen after it's done. I always choose yes, and I have never had any issue, but choosing no is safe. 
-![Copy distribution after](/pentoo_images/copy_distribution_after.png)
+![Copy distribution after](/assets/img/posts/pentoo-installation/copy_distribution_after.png)
 
 For the "Select Profile" step, I always choose 55.
 As quoted by Null Byte, "If you are migrating from Kali, this might be the best option as software installations will require less time and user input to complete."
 
-![usr binary](/pentoo_images/usr_binary.png)
+![usr binary](/assets/img/posts/pentoo-installation/usr_binary.png)
 For the next step, I choose nano, because it's easier. Feel free to choose vi or vim if you enjoy that. 
 
 You want to pay attention to the screen after that.
-![System configuration](/pentoo_images/system_configuration.png)
+![System configuration](/assets/img/posts/pentoo-installation/system_configuration.png)
 
 If you don't set the root password, you can just run root commands without any password, so can anyone with access to your laptop :)
 
 The Boot Options "Boot0pts"  configuration is the most interesting
-![NetworkManager](/pentoo_images/networkmanager.png)
+![NetworkManager](/assets/img/posts/pentoo-installation/networkmanager.png)
 
 - **BootNet**: enable this so NetworkManager starts automatically; otherwise Wi‑Fi and networking won’t come up on boot.
 - **BootX**: enable this to boot directly into the GUI instead of dropping into a console.
@@ -224,12 +224,12 @@ startx
 When you are done, Select "Done" to go back and "Done" again. 
 
 Next, install the bootloader, Select `GRUB2-UEFI`, that's the default
-![Bootloader installation](/pentoo_images/bootloader_installation.png)
+![Bootloader installation](/assets/img/posts/pentoo-installation/bootloader_installation.png)
 
 It will redirect you to the config file for Grub2, just exit for the installation to start.
 You can exit with `CTRL+X`. The installation should start right after that.
 
-![Bootloader done](/pentoo_images/bootloader_done.png)
+![Bootloader done](/assets/img/posts/pentoo-installation/bootloader_done.png)
 
 And that's all. 
 

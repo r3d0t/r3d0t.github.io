@@ -9,7 +9,7 @@ tags: [framework 13, screen freezing, linux, AI Chip]
 pin: true
 media_subpath: ''
 comments: true
-image: /framework13_fix/framework-screen-frozen.png
+image: /assets/img/posts/framework-laptop/framework-screen-frozen.png
 ---
 
 ### What Happened?
@@ -43,7 +43,7 @@ After looking at kernel logs, googling, reading the archlinux documentation and 
 ```bash
 sudo nano /etc/portage/make.conf
 ```
-![VIDEO_CARDS](/framework13_fix/video_cards.png)
+![VIDEO_CARDS](/assets/img/posts/framework-laptop/video_cards.png)
 
 - Update Mesa
 ```bash
@@ -58,7 +58,7 @@ sudo nano /etc/default/grub
 ```
 - Add the parameters `amdgpu.dcdebugmask=0x10 amdgpu.sg_display=0` to GRUB_CMDLINE_LINUX_DEFAULT like this
 
-![editing_grub](/framework13_fix/editing_grub.png)
+![editing_grub](/assets/img/posts/framework-laptop/editing_grub.png)
 
 - Save and Update grub
 ```bash
@@ -84,7 +84,7 @@ Section "Device"
 EndSection
 ```
 
-![amdgpu.conf](/framework13_fix/amdgpu_conf.png)
+![amdgpu.conf](/assets/img/posts/framework-laptop/amdgpu_conf.png)
 
 > I'm using an AMD GPU, but if you are using Nvidia, your config file will be slightly different.
 {: .prompt-info}

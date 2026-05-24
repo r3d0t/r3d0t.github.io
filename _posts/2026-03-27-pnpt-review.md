@@ -9,7 +9,7 @@ tags: [oscp, ethical hacking, certificates, penetration testing, pentesting, pen
 pin: false
 media_subpath: ''
 comments: true
-image: /post_images/PNPT.png
+image: /assets/img/posts/reviews/PNPT.png
 ---
 
 I took and passed the Practical Network Penetration Tester (PNPT) exam in May 2025 on my first attempt.
