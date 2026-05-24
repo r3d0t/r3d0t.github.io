@@ -14,12 +14,12 @@ timezone: America/New_York
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: r3d0t h4ck # the main title
+title: Pwn & Pivot # the main title
 
-tagline: Do you fancy the art and the craft ? # it will display as the subtitle
+tagline: Do you fancy the art and the craft? - r3d0t # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  A security researcher blending art and hacking
+  Offensive security research covering Red Team operations, Radio Frequency, Software Defined Radio and Wireless Security
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
