@@ -55,7 +55,7 @@ Now, we are ready to start.
 
 ####  Reading the RFID Card
 
-We will start by doing something simple, which is clone a hotel key card. 
+We will start by doing something simple, which is cloning a hotel key card.
 
 We can look inside the card with a flashlight to determine what kind of RFID Card it is (HF/LF). [See it here](https://youtu.be/cSZE3buFyi4?t=324)
 
@@ -70,7 +70,7 @@ auto
 
 We can see that it tries `lf search` first and didn't get anything. That means it is not an LF card.
 
-Then it tries `hf search`, and this time it identifies the tag, the UID, encryption (MIFARE Classic 1K), and so on... That confirms it is a HF card. Looking at the antenna inside the card also confirms it.
+Then it tries `hf search`, and this time it identifies the tag, the UID, encryption (MIFARE Classic 1K), and so on... That confirms it is an HF card. Looking at the antenna inside the card also confirms it.
 
 If we try the HINT command provided, we should be able to get more information on our hotel card.
 
@@ -83,7 +83,7 @@ This looks so beautiful. A couple of things to note:
 
 The "factory default" key is still being used `FFFFFFFFFFFF` which makes it extremely easy to clone or modify our card.
 
-proxmark3 found a `backdoor key` which allows us to bypass the security on the card. 
+proxmark3 found a `backdoor key`. On a genuine NXP MIFARE card, block 0 (the manufacturer block) is permanently write-protected after production. The FM11RF08S backdoor bypasses that protection and lets us write directly to block 0, which is exactly what we need to clone the card.
 
 The fingerprint is `Fudan FM11RF08S` which is a Chinese clone or compatible chip and not a genuine NXP MIFARE Card, and that also explains the weak PRNG (Pseudo-Random Number Generator)
 
@@ -106,7 +106,7 @@ The `Static enc nonce... yes` (enc=encrypted) shown at the bottom is another int
 
 Nonce stands for Number used ONCE. Typically, in a secure system, every time a card communicates with a reader, it should generate a new, random nonce to start the encryption. This helps prevent replay attacks using the same number.
 
-The `Static enc nonce... yes` means that the card uses the same number everytime it talks to a reader instead of generating a new number. If the number is very predictable, that is big security vulnerability,which is good for us ;) 
+The `Static enc nonce... yes` means that the card uses the same number everytime it talks to a reader instead of generating a new number. If the number is very predictable, that is a big security vulnerability, which is good for us ;) 
 
 There is a Hint command again at the bottom, let's try it!
 
@@ -114,7 +114,7 @@ There is a Hint command again at the bottom, let's try it!
 script run fm11rf08s_recovery.py
 ```
 ![pythonscript](/assets/img/posts/rfid-hacking/Proxmark3_running_pythonscript.png)
-As we can see from the output, all the sectors from 000-015 use the same factory default keys for A and B, except Sector 032 which was easy to get the key. It's fair to assume that sector 032 is where there is actual data, hence why the key isn't default. 
+As we can see from the output, all sectors from 0-15 use the same factory default keys for A and B. Those are the 16 sectors a genuine MIFARE Classic 1K would have. But the script also found sector 032 (block 131), which is an additional sector specific to this counterfeit Fudan chip. That sector has a non-default key, which is where the actual access data is stored.
 
 #### Cloning the card
 
