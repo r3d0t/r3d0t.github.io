@@ -60,6 +60,7 @@ We will start by doing something simple, which is cloning a hotel key card.
 We can look inside the card with a flashlight to determine what kind of RFID Card it is (HF/LF). [See it here](https://youtu.be/cSZE3buFyi4?t=324)
 
 > We can look inside a card that is "white" with a flash light. But if a card has paint over it or something, it may be hard or even impossible to see the antenna with a flashlight :(
+{: .prompt-tip}
 
 Usually, if we don't know what type of card (HF/LF) an RFID card is, we can simply place the card on our tool and run the `auto` command on proxmark3, which will run all the commands (including `lf search` and `hf search`)
 
