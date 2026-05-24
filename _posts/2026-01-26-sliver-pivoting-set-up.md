@@ -6,7 +6,7 @@ author: r3d0t
 date: 2026-01-26 22:03:00 -0500
 categories: [Red Team, Pivoting with Sliver]
 tags: [red team, c2, hacking, pivoting]
-pin: true
+pin: false
 media_subpath: ''
 comments: true
 image: /assets/img/posts/sliver-pivoting/Network_Diagram.drawio_cropped.png

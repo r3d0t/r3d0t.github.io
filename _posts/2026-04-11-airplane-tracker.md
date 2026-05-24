@@ -6,7 +6,7 @@ author: r3d0t
 date: 2026-04-11 18:15:00 -0500
 categories: [Software Defined Radio, Aircraft Tracker]
 tags: [linux, sdr, aircraft, tracking, hacking, osint]
-pin: true
+pin: false
 media_subpath: ''
 comments: true
 image: /assets/img/posts/airplane-tracker/dump1090_planes_map.png

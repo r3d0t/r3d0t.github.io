@@ -6,7 +6,7 @@ author: r3d0t
 date: 2026-03-02 09:30:00 -0500
 categories: [Penetration Testing, Active Directory]
 tags: [oscp, active directory, pentesting, ethical hacking, ethical hacker]
-pin: true
+pin: false
 media_subpath: ''
 comments: true
 image: /assets/img/posts/ad-hacking/Active_Directory_Hacking.jpg

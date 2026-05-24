@@ -6,7 +6,7 @@ author: r3d0t
 date: 2026-05-10 10:54:00 -0400
 categories: [Troubleshooting, Framework]
 tags: [framework 13, screen freezing, linux, AI Chip]
-pin: true
+pin: false
 media_subpath: ''
 comments: true
 image: /assets/img/posts/framework-laptop/framework-screen-frozen.png
