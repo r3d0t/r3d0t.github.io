@@ -1,7 +1,7 @@
 ---
 title: Practical RFID Recon with Proxmark3 (Part 1)
 description: >- 
- Analyzing and Cloning Hotel RFID Access Card
+ Analyzing and Cloning a Hotel RFID Access Card
 author: r3d0t
 date: 2026-05-12 21:30:00 -0400
 categories: [Radio Frequency, RFID Cards]
@@ -59,7 +59,7 @@ We will start by doing something simple, which is clone a hotel key card.
 
 We can look inside the card with a flashlight to determine what kind of RFID Card it is (HF/LF). [See it here](https://youtu.be/cSZE3buFyi4?t=324)
 
-> We can look inside a card that is "white" with a flash light. But if a card has paint over it or something,it may be hard or even impossible to see the antenna with a flashlight :(
+> We can look inside a card that is "white" with a flash light. But if a card has paint over it or something, it may be hard or even impossible to see the antenna with a flashlight :(
 
 Usually, if we don't know what type of card (HF/LF) an RFID card is, we can simply place the card on our tool and run the `auto` command on proxmark3, which will run all the commands (including `lf search` and `hf search`)
 
@@ -68,7 +68,7 @@ auto
 ```
 ![pm3_auto](/assets/img/posts/rfid-hacking/Proxmark3_auto.png)
 
-We can see that it tries `lf search` first and didn't get anything. That means it is not a LF card.
+We can see that it tries `lf search` first and didn't get anything. That means it is not an LF card.
 
 Then it tries `hf search`, and this time it identifies the tag, the UID, encryption (MIFARE Classic 1K), and so on... That confirms it is a HF card. Looking at the antenna inside the card also confirms it.
 
@@ -85,7 +85,7 @@ The "factory default" key is still being used `FFFFFFFFFFFF` which makes it extr
 
 proxmark3 found a `backdoor key` which allows us to bypass the security on the card. 
 
-The fingerprint is `Fudan FM11RF08S` which is a chinese clone or compatible chip and not a genuine NXP MIFARE Card, and that also explains the weak PRNG (Pseudo-Random Number Generator)
+The fingerprint is `Fudan FM11RF08S` which is a Chinese clone or compatible chip and not a genuine NXP MIFARE Card, and that also explains the weak PRNG (Pseudo-Random Number Generator)
 
 
 A typical Mifare Classic 1K card is like a cabinet with 16 drawers (Sectors). Each drawer has 4 folders (Blocks) inside.
@@ -104,7 +104,7 @@ MIFARE Cards don't have backdoor keys. The fact that proxmark3 found a secret Ba
 
 The `Static enc nonce... yes` (enc=encrypted) shown at the bottom is another interesting piece. 
 
-Nonce stands for Number used ONCE. Typically, in a secure system, everytime a card communicate with a reader, it should generate a new, random nonce to start the encryption. This helps prevent replay attacks using the same number.
+Nonce stands for Number used ONCE. Typically, in a secure system, every time a card communicates with a reader, it should generate a new, random nonce to start the encryption. This helps prevent replay attacks using the same number.
 
 The `Static enc nonce... yes` means that the card uses the same number everytime it talks to a reader instead of generating a new number. If the number is very predictable, that is big security vulnerability,which is good for us ;) 
 
@@ -118,14 +118,14 @@ As we can see from the output, all the sectors from 000-015 use the same factory
 
 #### Cloning the card
 
-First, we need to read our blank hf card and indentify if it has any magic capabilities, which is either `Gen 1a` or `Gen 2 (CUID)`
+First, we need to read our blank hf card and identify if it has any magic capabilities, which is either `Gen 1a` or `Gen 2 (CUID)`
 
 ```bash
 hf search
 ```
 ![blank_read](/assets/img/posts/rfid-hacking/blank_card_hf_search.png)
 
-Then, dump our hotel card. but since we already have a dump from running our python script, we are good! 
+Then, dump our hotel card. But since we already have a dump from running our Python script, we are good! 
 
 Now, we have to manually write block0 to our blank card.
 
@@ -143,7 +143,7 @@ In Block 0: `43B9FAB1B108040004C8C181C11B3E90`
 
 ![write_block0](/assets/img/posts/rfid-hacking/Writing_block0.png)
 
-We can run the hint command to verify block 0 was successfully written to our blank card.
+Now let's verify block 0 was successfully written to our blank card.
 
 ```bash
 hf mf rdbl --blk 0
@@ -167,4 +167,6 @@ hf mf info
 
 ![confirm_clone](/assets/img/posts/rfid-hacking/confirming_clone_data.png)
 
-And Voila! We have successfully cloned our hotel card. 
+And there we go! We have successfully cloned our hotel card.
+
+In Part 2, we will look at how to use the clone to actually gain access, and explore what else we can do with the data we extracted.
