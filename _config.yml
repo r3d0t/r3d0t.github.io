@@ -104,7 +104,7 @@ avatar: "/assets/img/favicons/redgirl.PNG"
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
-social_preview_image: # string, local or CORS resources
+social_preview_image: /assets/img/wolfsec.png
 
 # boolean type, the global switch for TOC in posts.
 toc: true
@@ -152,7 +152,7 @@ pwa:
 paginate: 10
 
 # The base URL of your site
-baseurl: "/r3d0t.github.io"
+baseurl: ""
 
 # ------------ The following options are not recommended to be modified ------------------
 
