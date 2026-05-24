@@ -1,7 +1,7 @@
 ---
 title: Burp Suite browser not working (Fix)
 description: >-
- Fixing an issue with the browser within Burp Suite on Linux
+  How to fix the Burp Suite embedded browser not launching on Linux — quick fix for the Chromium sandbox and version mismatch errors.
 author: r3d0t
 date: 2026-02-21 16:03:00 -0500
 categories: [Application Security, Burp Suite, Browser Issue]

@@ -1,7 +1,7 @@
 ---
 title: Practical RFID Recon with Proxmark3 (Part 1)
-description: >- 
- Analyzing and Cloning a Hotel RFID Access Card
+description: >-
+  How to read, analyze, and clone a hotel RFID key card using Proxmark3 — covers MIFARE Classic 1K structure, key recovery, and card cloning.
 author: r3d0t
 date: 2026-05-12 21:30:00 -0400
 categories: [Radio Frequency, RFID Cards]

@@ -1,7 +1,7 @@
 ---
 title: OSCP vs PNPT - A Review
 description: >-
- Comparing the OSCP and the PNPT
+  Side-by-side comparison of OSCP and PNPT — cost, difficulty, recognition, and which certification is the better choice for your career.
 author: r3d0t
 date: 2026-04-03 13:02:00 -0500
 categories: [Blog, OSCP/PNPT]

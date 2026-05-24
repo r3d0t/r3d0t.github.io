@@ -1,7 +1,7 @@
 ---
 title: Framework 13 Screen Freezing Fix
-description: >- 
- Fixing a GPU hang issue on the framework 13
+description: >-
+  How to fix screen freezing and GPU hangs on the Framework Laptop 13 running Linux — AMD GPU kernel parameter fix via GRUB.
 author: r3d0t
 date: 2026-05-10 10:54:00 -0400
 categories: [Troubleshooting, Framework]

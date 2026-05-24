@@ -1,7 +1,7 @@
 ---
 title: Active Directory Hacking
 description: >-
- Hacking Active Directory in preparation for the OSCP
+  Full Active Directory attack chain: enumeration with NetExec, credential hunting with WinPEAS, lateral movement, and privilege escalation with PrintSpoofer.
 author: r3d0t
 date: 2026-03-02 09:30:00 -0500
 categories: [Penetration Testing, Active Directory]
