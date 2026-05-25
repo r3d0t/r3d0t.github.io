@@ -2,9 +2,9 @@
 title: OSCP Exam Review 
 description: >-
   Honest review of the OSCP exam — difficulty, preparation tips, what to expect on exam day, and whether it is worth it in 2026.
-author: r3d0t
+author: pnp
 date: 2026-03-12 10:41:00 -0500
-categories: [Blog, OSCP]
+categories: [Certifications, OSCP]
 tags: [oscp, offsec, penetration testing, pentesting, certification, oscp review, exam, red team]
 pin: false
 media_subpath: ''

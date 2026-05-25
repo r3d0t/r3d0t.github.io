@@ -2,9 +2,9 @@
 title: Sliver C2 Pivoting Set Up
 description: >-
   Red team walkthrough using Sliver C2 to pivot through a compromised host, set up port forwarding, and reach internal network segments.
-author: r3d0t
+author: pnp
 date: 2026-01-26 22:03:00 -0500
-categories: [Red Team, Pivoting with Sliver]
+categories: [Red Team, C2]
 tags: [red team, sliver c2, c2 framework, pivoting, port forwarding, network penetration, lateral movement]
 pin: false
 media_subpath: ''

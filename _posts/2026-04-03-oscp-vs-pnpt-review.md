@@ -2,9 +2,9 @@
 title: OSCP vs PNPT - A Review
 description: >-
   Side-by-side comparison of OSCP and PNPT — cost, difficulty, recognition, and which certification is the better choice for your career.
-author: r3d0t
+author: pnp
 date: 2026-04-03 13:02:00 -0500
-categories: [Blog, OSCP/PNPT]
+categories: [Certifications, Reviews]
 tags: [oscp, pnpt, offsec, tcm security, penetration testing, certification, comparison, red team, pentesting]
 pin: false
 media_subpath: ''

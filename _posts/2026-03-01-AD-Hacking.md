@@ -2,9 +2,9 @@
 title: Active Directory Hacking
 description: >-
   Full Active Directory attack chain: enumeration with NetExec, credential hunting with WinPEAS, lateral movement, and privilege escalation with PrintSpoofer.
-author: r3d0t
+author: pnp
 date: 2026-03-02 09:30:00 -0500
-categories: [Penetration Testing, Active Directory]
+categories: [Red Team, Active Directory]
 tags: [active directory, oscp, red team, netexec, winpeas, printspoofer, privilege escalation, lateral movement, bloodhound, pentesting]
 pin: false
 media_subpath: ''

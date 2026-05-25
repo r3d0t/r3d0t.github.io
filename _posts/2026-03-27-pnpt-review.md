@@ -2,9 +2,9 @@
 title: PNPT Exam Review 
 description: >-
   Honest review of the PNPT certification by TCM Security — exam format, difficulty, practical pentesting skills tested, and who it is best suited for.
-author: r3d0t
+author: pnp
 date: 2026-03-27 18:15:00 -0500
-categories: [Blog, PNPT]
+categories: [Certifications, PNPT]
 tags: [pnpt, tcm security, penetration testing, pentesting, certification, pnpt review, exam, red team]
 pin: false
 media_subpath: ''

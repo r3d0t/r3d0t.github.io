@@ -2,9 +2,9 @@
 title: Pentoo Installation
 description: >-
   Step-by-step guide to installing Pentoo Linux, a Gentoo-based security distribution, including partitioning, bootloader setup, and post-install configuration.
-author: r3d0t
+author: pnp
 date: 2026-01-18 11:42:00 -0500
-categories: [Software Defined Radio, Pentoo Installation]
+categories: [Linux, Pentoo]
 tags: [pentoo, linux, gentoo, security distro, installation, live usb, dual boot]
 pin: true
 media_subpath: ''

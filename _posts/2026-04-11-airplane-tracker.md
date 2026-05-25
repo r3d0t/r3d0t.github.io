@@ -2,9 +2,9 @@
 title: Tracking Aircraft with Dump1090
 description: >-
   How to track live aircraft using a cheap RTL-SDR dongle, dump1090, and ADS-B signals — includes setup, antenna tips, and map visualization.
-author: r3d0t
+author: pnp
 date: 2026-04-11 18:15:00 -0500
-categories: [Software Defined Radio, Aircraft Tracker]
+categories: [Software Defined Radio, ADS-B]
 tags: [sdr, software defined radio, ads-b, dump1090, aircraft tracking, rtl-sdr, linux, osint, radio frequency]
 pin: false
 media_subpath: ''
