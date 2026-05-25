@@ -7,7 +7,6 @@ date: 2026-02-21 16:03:00 -0500
 categories: [Troubleshooting, Burp Suite]
 tags: [burp suite, chromium, linux, browser fix, web security, proxy, pentesting]
 pin: false
-media_subpath: ''
 comments: true
 image: /assets/img/posts/burp-suite/burp_suite_icon.png
 ---

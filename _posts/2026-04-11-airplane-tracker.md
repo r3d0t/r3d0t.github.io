@@ -7,7 +7,6 @@ date: 2026-04-11 18:15:00 -0500
 categories: [Software Defined Radio, ADS-B]
 tags: [sdr, software defined radio, ads-b, dump1090, aircraft tracking, rtl-sdr, linux, osint, radio frequency]
 pin: false
-media_subpath: ''
 comments: true
 image: /assets/img/posts/airplane-tracker/dump1090_planes_map.png
 ---

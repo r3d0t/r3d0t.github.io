@@ -6,12 +6,7 @@
 #   url: {homepage_of_author}
 # -------------------------------------
 
-r3d0t:
-  name: r3d0t
-  twitter: r3d0t_h4ck
-  url: https://github.com/r3d0t
-
-PnP:
+pnp:
   name: PnP
   github: r3d0t
   url: https://github.com/r3d0t

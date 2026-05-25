@@ -7,7 +7,6 @@ date: 2026-01-26 22:03:00 -0500
 categories: [Red Team, C2]
 tags: [red team, sliver c2, c2 framework, pivoting, port forwarding, network penetration, lateral movement]
 pin: false
-media_subpath: ''
 comments: true
 image: /assets/img/posts/sliver-pivoting/Network_Diagram.drawio_cropped.png
 ---

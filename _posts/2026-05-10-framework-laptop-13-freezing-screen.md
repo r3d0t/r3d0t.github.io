@@ -7,7 +7,6 @@ date: 2026-05-10 10:54:00 -0400
 categories: [Troubleshooting, Linux]
 tags: [framework laptop, linux, amd gpu, screen freeze, grub, kernel, troubleshooting]
 pin: false
-media_subpath: ''
 comments: true
 image: /assets/img/posts/framework-laptop/framework-screen-frozen.png
 ---

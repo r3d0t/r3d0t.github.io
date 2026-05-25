@@ -7,7 +7,6 @@ date: 2026-03-27 18:15:00 -0500
 categories: [Certifications, PNPT]
 tags: [pnpt, tcm security, penetration testing, pentesting, certification, pnpt review, exam, red team]
 pin: false
-media_subpath: ''
 comments: true
 image: /assets/img/posts/reviews/PNPT.png
 ---

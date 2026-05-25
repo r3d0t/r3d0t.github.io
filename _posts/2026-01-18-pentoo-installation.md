@@ -7,7 +7,6 @@ date: 2026-01-18 11:42:00 -0500
 categories: [Linux, Pentoo]
 tags: [pentoo, linux, gentoo, security distro, installation, live usb, dual boot]
 pin: true
-media_subpath: ''
 comments: true
 image: /assets/img/posts/pentoo-installation/pentoo_cropped.png
 ---

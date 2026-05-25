@@ -7,7 +7,6 @@ date: 2026-03-12 10:41:00 -0500
 categories: [Certifications, OSCP]
 tags: [oscp, offsec, penetration testing, pentesting, certification, oscp review, exam, red team]
 pin: false
-media_subpath: ''
 comments: true
 image: /assets/img/posts/reviews/Offsec.jpg
 ---

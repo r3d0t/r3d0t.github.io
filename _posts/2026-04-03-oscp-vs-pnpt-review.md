@@ -7,7 +7,6 @@ date: 2026-04-03 13:02:00 -0500
 categories: [Certifications, Reviews]
 tags: [oscp, pnpt, offsec, tcm security, penetration testing, certification, comparison, red team, pentesting]
 pin: false
-media_subpath: ''
 comments: true
 image: /assets/img/posts/reviews/steins-gate.jpg
 ---
