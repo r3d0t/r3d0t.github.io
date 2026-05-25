@@ -1,5 +1,5 @@
 ---
-title: Active Directory Hacking
+title: "Active Directory Attack Chain: NetExec, WinPEAS, and PrintSpoofer"
 description: >-
   Full Active Directory attack chain: enumeration with NetExec, credential hunting with WinPEAS, lateral movement, and privilege escalation with PrintSpoofer.
 author: pnp
@@ -321,6 +321,9 @@ And boom! We got our SYSTEM shell
 ![Shell from Printspoofer.exe.png](/assets/img/posts/ad-hacking/Shell%20from%20Printspoofer.exe.png)
 
 From here, we can grab the final proof.txt flag from the Administrator desktop and complete the lab.
+
+> Want to go deeper on C2 and pivoting techniques? [Network Pivoting with Sliver C2](https://r3d0t.github.io/posts/sliver-pivoting-set-up/) covers port forwarding through a compromised host to reach internal-only network segments. If you are working toward the OSCP and want to see how AD skills translate to the exam, check out the [OSCP Exam Review](https://r3d0t.github.io/posts/oscp-review/).
+{: .prompt-tip}
 
 
 

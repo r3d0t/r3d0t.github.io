@@ -1,5 +1,5 @@
 ---
-title: Sliver C2 Pivoting Set Up
+title: "Network Pivoting with Sliver C2"
 description: >-
   Red team walkthrough using Sliver C2 to pivot through a compromised host, set up port forwarding, and reach internal network segments.
 author: pnp
@@ -164,4 +164,7 @@ That concludes it! This is how we can access a website that is set up on a remot
 
 ## Why this matters ?
 
-This is very useful for real-world engagements, as this scenario is quite common. In real environments, your initial foothold is rarely on the “interesting” target; it is usually on a workstation that has access to internal networks you cannot see from the outside. Using Sliver’s port forwarding to pivot through that host lets you reach internal-only services (for example, the web server on Host B) without exposing new inbound ports. This can also be used to establish persistence if the implant can blend in as a legitimate service or scheduled task that runs periodically. 
+This is very useful for real-world engagements, as this scenario is quite common. In real environments, your initial foothold is rarely on the “interesting” target; it is usually on a workstation that has access to internal networks you cannot see from the outside. Using Sliver’s port forwarding to pivot through that host lets you reach internal-only services (for example, the web server on Host B) without exposing new inbound ports. This can also be used to establish persistence if the implant can blend in as a legitimate service or scheduled task that runs periodically.
+
+> Want to see pivoting applied in a full Active Directory attack? [Active Directory Attack Chain: NetExec, WinPEAS, and PrintSpoofer](https://r3d0t.github.io/posts/AD-Hacking/) walks through a multi-host AD compromise where lateral movement and tunneling are key.
+{: .prompt-tip}

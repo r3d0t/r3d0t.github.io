@@ -106,6 +106,9 @@ It's a methodical process that requires patience and logic. It's less about chas
 
 One of the biggest takeaways from my PNPT journey wasn't just technical, it was learning how I learn. I realized I'm at my best when I can slow down, read, take notes, and connect ideas at my own pace. That process helps me understand why something works instead of just memorizing commands. Once the concept clicks, I can move on to videos or visual learning without struggling. Understanding that changed how I approach learning in general.
 
+> Wondering how the PNPT stacks up against the OSCP? Check out the [OSCP vs PNPT Review](https://r3d0t.github.io/posts/oscp-vs-pnpt-review/), or read the [OSCP Exam Review](https://r3d0t.github.io/posts/oscp-review/) to see how my second attempt went.
+{: .prompt-tip}
+
 
 
 

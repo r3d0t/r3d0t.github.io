@@ -68,6 +68,9 @@ Neither certification is inherently “better”, they are simply better suited 
 
 For me, the choice comes down to where you are in your journey and what you want out of the experience.
 
+> Want the full story on each? Read the [OSCP Exam Review](https://r3d0t.github.io/posts/oscp-review/) and the [PNPT Exam Review](https://r3d0t.github.io/posts/pnpt-review/) for a deeper look at each exam experience.
+{: .prompt-tip}
+
 
 
 

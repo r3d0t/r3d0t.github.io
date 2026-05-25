@@ -146,3 +146,6 @@ By decoding live ADS-B transmissions, you capture unencrypted details like aircr
 
 This lets you pinpoint exactly where a particular aircraft is at any given moment, revealing patterns in executive travel, cargo movements, or even rare government flights, legally, of course, and with just a cheap SDR and Opensource tool.
 
+> Want to push your SDR further? [P25 Scanner using SDRTrunk](https://r3d0t.github.io/posts/p25-scanner/) walks through decoding live trunked radio communications from public safety agencies using the same hardware.
+{: .prompt-tip}
+

@@ -236,5 +236,8 @@ Pentoo is Open Source. If you have any questions or run into any issue, don't he
 
 Other ways to reach out are listed on the [official website](https://www.pentoo.ch)
 
+> Now that you have Pentoo up and running, here are a couple of things to try: [P25 Scanner using SDRTrunk](https://r3d0t.github.io/posts/p25-scanner/) for RF work, or [Practical RFID Recon with Proxmark3](https://r3d0t.github.io/posts/rfid-hacking/) for hardware hacking.
+{: .prompt-tip}
+
 
 

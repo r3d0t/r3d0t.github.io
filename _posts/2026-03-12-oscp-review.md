@@ -128,7 +128,10 @@ Message the proctor whenever you need to do something, but you don't have to wai
 Building your methodology is way more important than building your notes. There are thousands of public notes you can borrow any time. Your methodology is unique to you. Figure out what works, what feels natural, what actually clicks in your head.
 
 
-That’s all I can think of for now. I’m probably forgetting a few things, but I’m always happy to answer questions. If you’re taking or planning to take the OSCP, remember: pass or fail, you’re still learning. 
+That’s all I can think of for now. I’m probably forgetting a few things, but I’m always happy to answer questions. If you’re taking or planning to take the OSCP, remember: pass or fail, you’re still learning.
+
+> Curious how the OSCP compares to the PNPT? Read the [OSCP vs PNPT Review](https://r3d0t.github.io/posts/oscp-vs-pnpt-review/) for a side-by-side breakdown, or check out the [PNPT Exam Review](https://r3d0t.github.io/posts/pnpt-review/) if you want my take on that one specifically.
+{: .prompt-tip}
 
 
 
