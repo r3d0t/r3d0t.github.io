@@ -5,7 +5,7 @@ icon: fas fa-user-secret
 order: 4
 ---
 
-I'm PnP — a security researcher, a geek, a nerd, and someone who genuinely enjoys breaking things to understand how they work.
+I'm PnP -  a security researcher, a geek, a nerd, and someone who genuinely enjoys breaking things to understand how they work.
 
 I focus on red teaming, wireless security, and IoT, digging into the hardware and RF.
 I hold the OSCP and PNPT, but beyond that, I care about the craft.
