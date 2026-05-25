@@ -5,7 +5,7 @@ description: >-
 author: r3d0t
 date: 2026-03-02 09:30:00 -0500
 categories: [Penetration Testing, Active Directory]
-tags: [oscp, active directory, pentesting, ethical hacking, ethical hacker]
+tags: [active directory, oscp, red team, netexec, winpeas, printspoofer, privilege escalation, lateral movement, bloodhound, pentesting]
 pin: false
 media_subpath: ''
 comments: true

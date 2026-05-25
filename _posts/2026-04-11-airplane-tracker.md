@@ -5,7 +5,7 @@ description: >-
 author: r3d0t
 date: 2026-04-11 18:15:00 -0500
 categories: [Software Defined Radio, Aircraft Tracker]
-tags: [linux, sdr, aircraft, tracking, hacking, osint]
+tags: [sdr, software defined radio, ads-b, dump1090, aircraft tracking, rtl-sdr, linux, osint, radio frequency]
 pin: false
 media_subpath: ''
 comments: true
@@ -38,7 +38,7 @@ cd dump1090
 ls
 ```
 
-![dump1090_before_make.png](/assets/img/posts/airplane-tracker/dump1090_before_make.png)
+![dump1090 source directory before running make](/assets/img/posts/airplane-tracker/dump1090_before_make.png)
 
 You will notice that it doesn't have the executable, so you will have to install some dependencies and then execute the "make" command.
 
@@ -48,7 +48,7 @@ sudo apt install -y pkg-config librtlsdr-dev libusb-1.0-0-dev build-essential
 make
 ```
 
-![dump1090_after_make.png](/assets/img/posts/airplane-tracker/dump1090_after_make.png)
+![dump1090 after successful compilation with make](/assets/img/posts/airplane-tracker/dump1090_after_make.png)
 
 Now, you can see the executable is there.
 
@@ -59,7 +59,7 @@ Let's plug in our SDR and run `dump1090` in interactive mode with a map we can a
 ./dump1090 --interactive --net
 ```
 
-![running_dump1090.png](/assets/img/posts/airplane-tracker/running_dump1090.png)
+![dump1090 running and receiving ADS-B signals](/assets/img/posts/airplane-tracker/running_dump1090.png)
 
 We can see the airplanes data, like flight, hex, altitude, speed, Latitude, Longitude, Track, Messages and Seen.
 
@@ -100,7 +100,7 @@ Another way of explaining this:
 270°-359° = West/Northwest → toward top-left
 ```
 
-![compass_image.png](/assets/img/posts/airplane-tracker/compass_image.png)
+![Compass bearing calculation for aircraft direction](/assets/img/posts/airplane-tracker/compass_image.png)
 
 In our case, with a Track of 280 degrees, it indicates that the aircraft is moving West-NorthWest.
 
@@ -108,9 +108,9 @@ In our case, with a Track of 280 degrees, it indicates that the aircraft is movi
 Putting the Lat/Lon in [Google Maps](https://www.google.com/maps) , we can see that with a latitude of 38.985 and longitude of -77.256, `SWA1747` was flying near Great Falls Park, Virginia.
 
 
-![google_map_location.png](/assets/img/posts/airplane-tracker/google_map_location.png)
+![Google Maps showing SDR receiver location](/assets/img/posts/airplane-tracker/google_map_location.png)
 
-![google_map_satellite_view.png](/assets/img/posts/airplane-tracker/google_map_satellite_view.png)
+![Google Maps satellite view of SDR receiver location](/assets/img/posts/airplane-tracker/google_map_satellite_view.png)
 
 
 ### On the Interactive Map
@@ -119,7 +119,7 @@ Port 8080 gives you a live map at http://localhost:8080, watch planes move in re
 
 Now, if we open http://localhost:8080 in our browser, we will have a map with all the planes icons and positioning.
 
-![dump1090_planes_map.png](/assets/img/posts/airplane-tracker/dump1090_planes_map.png)
+![dump1090 live map showing tracked aircraft](/assets/img/posts/airplane-tracker/dump1090_planes_map.png)
 
 If for some reasons port 8080 is not working or is being used by another service or app,
 We can change our port like this
@@ -128,7 +128,7 @@ We can change our port like this
 ./dump1090 --interactive --net --net-http-port 1234
 ```
 
-![dump1090_port_changed.png](/assets/img/posts/airplane-tracker/dump1090_port_changed.png)
+![dump1090 with custom port configuration](/assets/img/posts/airplane-tracker/dump1090_port_changed.png)
 
 
 This is an interactive map, which means the icons move in real time, and the number of airplanes detected will change in real time as well.
@@ -137,7 +137,7 @@ You can click and drag to move around the map, and you can zoom in and out too. 
 
 If we select/click on a plane, we can have some more information on it. Like this:
 
-![dump1090_plane_tracked.png](/assets/img/posts/airplane-tracker/dump1090_plane_tracked.png)
+![dump1090 tracking a specific aircraft with ADS-B data](/assets/img/posts/airplane-tracker/dump1090_plane_tracked.png)
 
 ### Conclusion
 

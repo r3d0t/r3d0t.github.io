@@ -5,7 +5,7 @@ description: >-
 author: r3d0t
 date: 2026-05-10 10:54:00 -0400
 categories: [Troubleshooting, Framework]
-tags: [framework 13, screen freezing, linux, AI Chip]
+tags: [framework laptop, linux, amd gpu, screen freeze, grub, kernel, troubleshooting]
 pin: false
 media_subpath: ''
 comments: true
@@ -43,7 +43,7 @@ After looking at kernel logs, googling, reading the archlinux documentation and 
 ```bash
 sudo nano /etc/portage/make.conf
 ```
-![VIDEO_CARDS](/assets/img/posts/framework-laptop/video_cards.png)
+![AMD GPU video cards listed on Framework Laptop 13](/assets/img/posts/framework-laptop/video_cards.png)
 
 - Update Mesa
 ```bash
@@ -58,7 +58,7 @@ sudo nano /etc/default/grub
 ```
 - Add the parameters `amdgpu.dcdebugmask=0x10 amdgpu.sg_display=0` to GRUB_CMDLINE_LINUX_DEFAULT like this
 
-![editing_grub](/assets/img/posts/framework-laptop/editing_grub.png)
+![Editing GRUB configuration to fix AMD GPU hang on Linux](/assets/img/posts/framework-laptop/editing_grub.png)
 
 - Save and Update grub
 ```bash
@@ -84,7 +84,7 @@ Section "Device"
 EndSection
 ```
 
-![amdgpu.conf](/assets/img/posts/framework-laptop/amdgpu_conf.png)
+![amdgpu.conf kernel parameter configuration file](/assets/img/posts/framework-laptop/amdgpu_conf.png)
 
 > I'm using an AMD GPU, but if you are using Nvidia, your config file will be slightly different.
 {: .prompt-info}

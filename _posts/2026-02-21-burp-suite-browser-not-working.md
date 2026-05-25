@@ -5,7 +5,7 @@ description: >-
 author: r3d0t
 date: 2026-02-21 16:03:00 -0500
 categories: [Application Security, Burp Suite, Browser Issue]
-tags: [burp suite, chromium, linux]
+tags: [burp suite, chromium, linux, browser fix, web security, proxy, pentesting]
 pin: false
 media_subpath: ''
 comments: true
@@ -36,7 +36,7 @@ find ~ -type f -name "chrome-sandbox"
 
 You’ll likely see multiple versions. For example:
 
-![listing_versions](/assets/img/posts/burp-suite/listing_versions.png)
+![Listing Chromium versions available in Burp Suite](/assets/img/posts/burp-suite/listing_versions.png)
 
 In my case, the latest version was 
 
@@ -49,7 +49,7 @@ You can go to the directory and list all the versions there directly:
 ```bash
 cd /home/kali/.BurpSuite/burpbrowser && ls
 ```
-![checking_versions](/assets/img/posts/burp-suite/checking_versions.png)
+![Checking Chromium version compatibility in Burp Suite](/assets/img/posts/burp-suite/checking_versions.png)
 
 Then remove the ones you don’t want:
 

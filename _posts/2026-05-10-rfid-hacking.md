@@ -5,7 +5,7 @@ description: >-
 author: r3d0t
 date: 2026-05-12 21:30:00 -0400
 categories: [Radio Frequency, RFID Cards]
-tags: [radio frequency, rfid, rfid hacking, ethical hacking, linux, pentoo, proxmark3, proxmark3-easy]
+tags: [rfid, proxmark3, mifare, nfc, card cloning, hardware hacking, radio frequency, linux, pentoo]
 pin: true
 media_subpath: ''
 comments: true

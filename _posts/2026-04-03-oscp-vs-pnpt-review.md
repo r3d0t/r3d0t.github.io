@@ -5,7 +5,7 @@ description: >-
 author: r3d0t
 date: 2026-04-03 13:02:00 -0500
 categories: [Blog, OSCP/PNPT]
-tags: [oscp, pnpt, ethical hacking, certificates, penetration testing, oscp review, pentesting, penetration tester, pnpt review]
+tags: [oscp, pnpt, offsec, tcm security, penetration testing, certification, comparison, red team, pentesting]
 pin: false
 media_subpath: ''
 comments: true
