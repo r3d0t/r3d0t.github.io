@@ -90,6 +90,9 @@ EndSection
 
 - Save and then reboot. 
 
+> I noticed that the mouse was disappearing sometimes when I was in a browser. setting TearFree to "true" in the 20-amdgpu.conf file fized the issue
+{: .prompt-warning}
+
 ### What helped
 
 Here are the links that actually helped me figure it out, in case my fix doesn't work for you. You should try to go through them and hopefully find the fix that works for your specific situation. 
