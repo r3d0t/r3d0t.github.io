@@ -169,4 +169,4 @@ hf mf info
 
 And there we go! We have successfully cloned our hotel card.
 
-In Part 2, we will look at how to use the clone to actually gain access, and explore what else we can do with the data we extracted.
+In Part 2, we will explore what else we can do with the data we extracted.
