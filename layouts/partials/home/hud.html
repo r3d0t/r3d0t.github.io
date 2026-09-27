@@ -1,0 +1,120 @@
+{{/* PnP custom home: "Midnight HUD". The Proxmark bench photo, graded to midnight, framed like a target lock. */}}
+{{ .Store.Set "suppressBackgroundCanvas" true }}
+{{ $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+{{ $author := site.Params.Author }}
+{{ $hero := resources.Get "img/hero-proxmark.png" }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Martian+Mono:wght@400;500&display=swap">
+<style>
+  html.dark body, body { background: #04060c; overflow-x: clip; }
+  .hud { --bg: #04060c; --text: #dfe3ee; --dim: #7a8399; --line: rgba(160,180,220,.16);
+         --red: #ff3b4e; --amber: #ffb547;
+         color: var(--text); font-family: "Martian Mono", ui-monospace, Menlo, monospace; }
+  .hud a { color: inherit; text-decoration: none; }
+  .hud-hero { position: relative; margin: -1rem calc(50% - 50vw) 0; min-height: min(88vh, 760px); display: grid; place-items: center;
+    padding: 6rem 1rem 3rem; isolation: isolate; overflow: hidden; }
+  .hud-bg { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; max-width: none;
+    filter: grayscale(.55) contrast(1.15) brightness(.55) saturate(1.2); transform: scale(1.04); }
+  .hud-hero::before { /* midnight grade + red key light */
+    content: ""; position: absolute; inset: 0; z-index: -2;
+    background:
+      radial-gradient(50rem 26rem at 50% 42%, rgba(255,59,78,.20), transparent 65%),
+      linear-gradient(180deg, rgba(4,6,12,.55) 0%, rgba(6,10,30,.62) 45%, var(--bg) 100%);
+    mix-blend-mode: normal; }
+  .hud-hero::after { /* scanlines + grid */
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      repeating-linear-gradient(to bottom, rgba(255,255,255,.035) 0 1px, transparent 1px 3px),
+      linear-gradient(rgba(160,180,220,.05) 1px, transparent 1px) 0 0 / 64px 64px,
+      linear-gradient(90deg, rgba(160,180,220,.05) 1px, transparent 1px) 0 0 / 64px 64px; }
+  .hud-lock { position: relative; width: min(100%, 44rem); padding: clamp(1.5rem, 5vw, 3rem); text-align: center; }
+  .hud-lock i { position: absolute; width: 28px; height: 28px; border: 2px solid var(--red); }
+  .hud-lock i:nth-child(1) { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+  .hud-lock i:nth-child(2) { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+  .hud-lock i:nth-child(3) { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+  .hud-lock i:nth-child(4) { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+  .hud-tag { position: absolute; top: -.7rem; left: 2.4rem; background: var(--bg); padding: 0 .5rem; font-size: .62rem; letter-spacing: .2em; color: var(--red); text-transform: uppercase; }
+  .hud-av { width: clamp(92px, 14vw, 124px); aspect-ratio: 1; margin: 0 auto 1.2rem; position: relative; }
+  .hud-av img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; border: 1px solid rgba(255,59,78,.7); box-shadow: 0 0 0 4px rgba(4,6,12,.8), 0 0 50px rgba(255,59,78,.4); }
+  .hud-av::after { content: ""; position: absolute; left: -8px; right: -8px; height: 2px; top: 0; background: var(--red); box-shadow: 0 0 12px var(--red); animation: hud-scan 3.2s ease-in-out infinite; opacity: .85; }
+  @keyframes hud-scan { 0%,100% { top: 4% } 50% { top: 94% } }
+  .hud-title { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .02em;
+    font-size: clamp(2.5rem, 9vw, 5.6rem); line-height: .92; color: #fff; margin: 0; text-wrap: balance; }
+  .hud-title span { color: var(--red); }
+  .hud-sub { margin: 1rem auto 0; max-width: 44ch; color: #c3c9d8; font-size: clamp(.78rem, 1.5vw, .92rem); line-height: 1.7; }
+  .hud-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; margin-top: 1.6rem; }
+  .hud-btn { font-family: "Chakra Petch", sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; font-size: .85rem;
+    padding: .75rem 1.3rem; border: 1px solid var(--line); background: rgba(4,6,12,.6); clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); transition: background .2s, border-color .2s; }
+  .hud-btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
+  .hud-btn:hover, .hud-btn:focus-visible { border-color: var(--red); background: rgba(255,59,78,.18); outline: none; }
+  .hud-btn.primary:hover { background: #ff5566; }
+  .hud-meta { display: flex; justify-content: center; flex-wrap: wrap; gap: .3rem 1.6rem; margin-top: 1.4rem; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+  .hud-meta b { color: var(--amber); font-weight: 500; }
+  .hud-sec { max-width: 72rem; margin: 3rem auto 0; }
+  .hud-h { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
+  .hud-h h2 { font-family: "Chakra Petch", sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: 1.1rem; color: #fff; margin: 0; white-space: nowrap; }
+  .hud-h hr { flex: 1; border: 0; border-top: 1px solid var(--line); margin: 0; }
+  .hud-h a { font-size: .7rem; color: var(--red); white-space: nowrap; letter-spacing: .1em; text-transform: uppercase; }
+  .hud-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .hud-card { position: relative; display: flex; flex-direction: column; background: #080c18; border: 1px solid var(--line); overflow: hidden; transition: border-color .2s, transform .2s; }
+  .hud-card:hover, .hud-card:focus-visible { border-color: rgba(255,59,78,.7); transform: translateY(-3px); outline: none; }
+  .hud-card .img { aspect-ratio: 16/9; background: #0b1020; overflow: hidden; position: relative; }
+  .hud-card .img img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.85) brightness(.85); transition: transform .5s, filter .3s; }
+  .hud-card:hover .img img { transform: scale(1.04); filter: none; }
+  .hud-card .img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(8,12,24,.9)); }
+  .hud-card .cat { position: absolute; left: .7rem; bottom: .6rem; z-index: 1; font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: var(--amber); }
+  .hud-card .bd { padding: .9rem 1rem 1.1rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
+  .hud-card .t { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: 1.12rem; line-height: 1.25; color: #fff; }
+  .hud-card .d { font-size: .72rem; line-height: 1.6; color: var(--dim); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .hud-card .m { margin-top: auto; font-size: .62rem; letter-spacing: .1em; color: var(--dim); text-transform: uppercase; font-variant-numeric: tabular-nums; }
+  .hud-card::before { content: ""; position: absolute; top: 0; right: 0; width: 14px; height: 14px; border-top: 2px solid var(--red); border-right: 2px solid var(--red); z-index: 2; opacity: 0; transition: opacity .2s; }
+  .hud-card:hover::before { opacity: 1; }
+  @media (max-width: 900px) { .hud-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .hud-grid { grid-template-columns: 1fr; } .hud-tag { left: 1.4rem; } }
+  @media (prefers-reduced-motion: reduce) { .hud-av::after { animation: none; top: 50%; } .hud-card, .hud-card .img img { transition: none; } }
+</style>
+
+<div class="hud">
+  <section class="hud-hero">
+    {{ with $hero }}{{ $h := .Resize "1920x q80 webp" }}<img class="hud-bg" src="{{ $h.RelPermalink }}" alt="" aria-hidden="true" fetchpriority="high">{{ end }}
+    <div class="hud-lock">
+      <i></i><i></i><i></i><i></i>
+      <span class="hud-tag">// target acquired</span>
+      <div class="hud-av">
+        {{ with $author.image }}{{ with resources.Get . }}{{ $av := .Fill "248x248 Center q96" }}
+          <img src="{{ $av.RelPermalink }}" width="124" height="124" alt="{{ $author.name }}">
+        {{ end }}{{ end }}
+      </div>
+      <h1 class="hud-title">Pwn <span>&amp;</span> Pivot</h1>
+      <p class="hud-sub">Red teaming, RF and software-defined radio, RFID and hardware hacking. Real labs, real tools, no fluff.</p>
+      <div class="hud-cta">
+        <a class="hud-btn primary" href="{{ "posts/" | relURL }}">Read the posts</a>
+        <a class="hud-btn" href="{{ "about/" | relURL }}">$ whoami</a>
+        <a class="hud-btn" href="https://github.com/r3d0t">GitHub</a>
+      </div>
+      <div class="hud-meta" aria-hidden="true">
+        <span>Operator <b>{{ $author.name }}</b></span><span>Certs <b>OSCP · PNPT</b></span><span>Posts <b>{{ len $posts }}</b></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud-sec">
+    <div class="hud-h"><h2>Latest ops</h2><hr><a href="{{ "posts/" | relURL }}">All posts →</a></div>
+    <div class="hud-grid">
+      {{ range first 6 $posts }}
+        <a class="hud-card" href="{{ .RelPermalink }}">
+          <div class="img">
+            {{ with .Resources.GetMatch "feature*" }}{{ $i := .Fill "640x360 Center q80 webp" }}<img src="{{ $i.RelPermalink }}" alt="" loading="lazy" width="640" height="360">{{ end }}
+            {{ with .Params.categories }}<span class="cat">{{ delimit . " / " }}</span>{{ end }}
+          </div>
+          <div class="bd">
+            <div class="t">{{ .Title }}</div>
+            <div class="d">{{ .Description }}</div>
+            <div class="m">{{ .Date.Format "02 Jan 2006" }} · {{ .ReadingTime }} min read</div>
+          </div>
+        </a>
+      {{ end }}
+    </div>
+  </section>
+</div>

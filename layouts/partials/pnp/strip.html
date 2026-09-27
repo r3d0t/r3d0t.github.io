@@ -1,0 +1,27 @@
+{{/* ---------------------------------------------------------------------------
+  pnp/strip.html - the reusable banner with a live waterfall behind a title.
+  This is the generic version used by list/tag/category pages. (The homepage
+  and About page build their own richer versions of the same idea.)
+
+  Arguments (dict):
+    eyebrow  = small line above the title (optional)
+    title    = the big heading
+    lead     = a sentence under the title (optional)
+    readout  = optional list of [key value] pairs shown as monospace stats,
+               e.g. (slice (slice "TUNED" "1090 MHz") (slice "LOG" "12"))
+    carriers = comma string of waterfall spike positions (default "0.5,0.22,0.71")
+    compact  = true trims the bottom padding for a shorter strip
+
+  Everything is marked | safeHTML so you can pass in styled markup on purpose.
+---------------------------------------------------------------------------- */}}
+<section class="sx-strip {{ if .compact }}is-compact{{ end }}">
+  <canvas data-waterfall data-carriers="{{ .carriers | default "0.5,0.22,0.71" }}" aria-hidden="true"></canvas> {{/* the animated background */}}
+  <span class="sx-marker" data-tune-marker aria-hidden="true"></span>                                            {{/* the amber line that slides to a tuned channel */}}
+  <div class="sx-strip-in">
+    {{ with .eyebrow }}<div class="sx-eyebrow">{{ . | safeHTML }}</div>{{ end }}
+    <h1 class="sx-title">{{ .title | safeHTML }}</h1>
+    {{ with .lead }}<p class="sx-lead">{{ . | safeHTML }}</p>{{ end }}
+    {{/* readout stats. The one keyed "TUNED" gets data-tune-readout so waterfall.js can rewrite it live on hover. */}}
+    {{ with .readout }}<div class="sx-readout">{{ range . }}<span>{{ index . 0 }} <b {{ if eq (index . 0) "TUNED" }}data-tune-readout="{{ index . 1 }}"{{ end }}>{{ index . 1 }}</b></span>{{ end }}</div>{{ end }}
+  </div>
+</section>

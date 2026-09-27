@@ -1,0 +1,138 @@
+{{/* PnP custom home: "TTY". A Pentoo shell session inside a tmux pane. */}}
+{{ .Store.Set "suppressBackgroundCanvas" true }}
+{{ $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+{{ $author := site.Params.Author }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,800;1,400&display=swap">
+<style>
+  html.dark body, body { background: #05070a; }
+  .tty {
+    --bg: #05070a; --pane: #080b10; --line: #1a212b; --text: #cfd6df; --dim: #5f6b7a;
+    --red: #ff3b4e; --amber: #ffb547; --cyan: #5ad1e6; --ok: #7ee787;
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--text); position: relative; margin: 1rem auto 2rem; max-width: 72rem;
+  }
+  .tty::before { /* ambient glow behind the pane */
+    content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+    background:
+      radial-gradient(60rem 30rem at 85% -10%, rgba(255,59,78,.10), transparent 60%),
+      radial-gradient(40rem 30rem at 0% 110%, rgba(90,209,230,.06), transparent 60%),
+      #05070a;
+  }
+  .tty-pane {
+    position: relative; background: var(--pane); border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: 0 0 0 1px rgba(255,59,78,.06), 0 30px 80px rgba(0,0,0,.6); overflow: hidden;
+  }
+  .tty-pane::after { /* scanlines */
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(to bottom, rgba(255,255,255,.018) 0 1px, transparent 1px 3px);
+  }
+  .tty-body { padding: clamp(1rem, 3vw, 2rem); font-size: clamp(.8rem, 1.6vw, .95rem); line-height: 1.7; }
+  .tty-block { margin-bottom: 1.4rem; animation: tty-in .35s ease-out both; }
+  .tty-block:nth-child(2) { animation-delay: .15s } .tty-block:nth-child(3) { animation-delay: .3s }
+  .tty-block:nth-child(4) { animation-delay: .45s } .tty-block:nth-child(5) { animation-delay: .6s }
+  @keyframes tty-in { from { opacity: .0; transform: translateY(4px) } to { opacity: 1; transform: none } }
+  .p1 { color: var(--cyan); } .p1 b { color: var(--red); font-weight: 600; }
+  .p2 { color: var(--cyan); } .p2 .cmd { color: var(--text); } .p2 .arg { color: var(--amber); }
+  .tty .out { color: var(--text); padding-left: 0; }
+  .tty .dim { color: var(--dim); }
+  .tty-hero { display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem, 3vw, 2rem); align-items: center; margin: .6rem 0 .2rem; }
+  .tty-hero img { width: clamp(84px, 14vw, 132px); height: auto; aspect-ratio: 1; border-radius: 6px;
+    image-rendering: pixelated; border: 1px solid var(--line); box-shadow: 0 0 0 3px rgba(255,59,78,.25); }
+  .tty-name { font-size: clamp(1.9rem, 6vw, 3.6rem); font-weight: 800; line-height: 1; letter-spacing: -.03em; color: #fff; margin: 0; }
+  .tty-name span { color: var(--red); }
+  .tty-tag { margin-top: .6rem; color: var(--dim); }
+  .tty-tag em { color: var(--amber); font-style: normal; }
+  .tty-links { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin-top: .6rem; }
+  .tty a { color: inherit; text-decoration: none; }
+  .tty-links a { color: var(--cyan); } .tty-links a:hover { color: #fff; }
+  .tty-ls { display: grid; gap: .15rem; margin-top: .3rem; }
+  .tty-row { display: grid; grid-template-columns: 11ch 6ch 7ch 1fr; gap: 1.4ch; padding: .25rem .5rem; margin: 0 -.5rem; border-radius: 4px; align-items: baseline; }
+  .tty-row:hover, .tty-row:focus-visible { background: rgba(255,59,78,.08); outline: none; }
+  .tty-row:hover .t, .tty-row:focus-visible .t { color: #fff; }
+  .tty-row .perm { color: var(--dim); } .tty-row .sz { color: var(--ok); text-align: right; font-variant-numeric: tabular-nums; }
+  .tty-row .dt { color: var(--dim); font-variant-numeric: tabular-nums; }
+  .tty-row .t { color: var(--text); } .tty-row .f { color: var(--amber); }
+  .tty-row .d { display: block; color: var(--dim); font-size: .85em; margin-top: .1rem; }
+  .tty-dirs { display: flex; flex-wrap: wrap; gap: .3rem 2.2ch; }
+  .tty-dirs a { color: #6ea8ff; font-weight: 600; } .tty-dirs a:hover { color: #fff; text-decoration: underline; }
+  .cursor { display: inline-block; width: .6em; height: 1.1em; background: var(--red); vertical-align: -.2em; animation: blink 1.1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0 } }
+  .tmux { display: flex; justify-content: space-between; gap: 1rem; padding: .35rem .8rem; background: #0e131a; border-top: 1px solid var(--line);
+    font-size: .75rem; color: var(--dim); white-space: nowrap; overflow: hidden; }
+  .tmux .win { color: #0b0e13; background: var(--red); padding: 0 .5rem; font-weight: 700; }
+  .tmux .w { padding: 0 .5rem; }
+  @media (max-width: 640px) {
+    .tty-row { grid-template-columns: 6ch 1fr; } .tty-row .perm, .tty-row .sz { display: none; }
+    .tmux .opt { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .tty-block, .cursor { animation: none; } }
+</style>
+
+<section class="tty">
+  <div class="tty-pane">
+    <div class="tty-body">
+      <div class="tty-block">
+        <div class="p1">┌──(<b>pnp㉿pentoo</b>)-[~]</div>
+        <div class="p2">└─$ <span class="cmd">whoami</span></div>
+        <div class="tty-hero">
+          {{ with $author.image }}{{ with resources.Get . }}{{ $av := .Fill "264x264 Center q96" }}
+            <img src="{{ $av.RelPermalink }}" width="132" height="132" alt="{{ $author.name }}">
+          {{ end }}{{ end }}
+          <div>
+            <h1 class="tty-name">Pwn<span>&amp;</span>Pivot</h1>
+            <div class="tty-tag"># {{ $author.name }} · red team, RF, SDR and hardware hacking · <em>OSCP</em> <em>PNPT</em></div>
+            <div class="tty-links">
+              <a href="{{ "about/" | relURL }}">./whoami --long</a>
+              <a href="https://github.com/r3d0t">github.com/r3d0t</a>
+              <a href="{{ "index.xml" | relURL }}">feed.xml</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tty-block">
+        <div class="p1">┌──(<b>pnp㉿pentoo</b>)-[~]</div>
+        <div class="p2">└─$ <span class="cmd">cat</span> <span class="arg">motto.txt</span></div>
+        <div class="out">"{{ site.Params.Author.headline }}" <span class="dim">— break it to understand it.</span></div>
+      </div>
+
+      <div class="tty-block">
+        <div class="p1">┌──(<b>pnp㉿pentoo</b>)-[~]</div>
+        <div class="p2">└─$ <span class="cmd">ls -lt</span> <span class="arg">~/posts</span> <span class="dim">| head -n 8</span></div>
+        <div class="dim">total {{ len $posts }}</div>
+        <div class="tty-ls">
+          {{ range first 8 $posts }}
+            <a class="tty-row" href="{{ .RelPermalink }}">
+              <span class="perm">-rw-r--r--</span>
+              <span class="sz">{{ .WordCount }}w</span>
+              <span class="dt">{{ .Date.Format "Jan 02" }}</span>
+              <span><span class="t">{{ .Title }}</span><span class="d">{{ with .Params.categories }}{{ delimit . " / " }}{{ end }}</span></span>
+            </a>
+          {{ end }}
+        </div>
+        <div style="margin-top:.5rem"><a class="tty-links" href="{{ "posts/" | relURL }}"><span style="color:var(--cyan)">→ ls -lt ~/posts (all {{ len $posts }})</span></a></div>
+      </div>
+
+      <div class="tty-block">
+        <div class="p1">┌──(<b>pnp㉿pentoo</b>)-[~]</div>
+        <div class="p2">└─$ <span class="cmd">ls</span> <span class="arg">~/topics</span></div>
+        <div class="tty-dirs">
+          {{ range site.Taxonomies.categories.ByCount }}
+            {{ if ge .Count 2 }}<a href="{{ .Page.RelPermalink }}">{{ .Page.Title | urlize | lower }}/</a>{{ end }}
+          {{ end }}
+        </div>
+      </div>
+
+      <div class="tty-block">
+        <div class="p1">┌──(<b>pnp㉿pentoo</b>)-[~]</div>
+        <div class="p2">└─$ <span class="cursor" aria-hidden="true"></span></div>
+      </div>
+    </div>
+    <div class="tmux" aria-hidden="true">
+      <span><span class="win">0:zsh*</span><span class="w">1:posts</span><span class="w opt">2:proxmark3</span><span class="w opt">3:sdrtrunk</span></span>
+      <span class="opt">"pnp@pentoo" · {{ now.Format "15:04 02-Jan-06" }}</span>
+    </div>
+  </div>
+</section>

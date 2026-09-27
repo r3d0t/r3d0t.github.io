@@ -1,0 +1,24 @@
+locale = "en"
+label = "English"
+weight = 1
+title = "Pwn & Pivot"
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+  rtl = false
+  dateFormat = "Jan 2, 2006"
+  description = "Offensive security research covering Red Team operations, Radio Frequency, Software Defined Radio and Wireless Security"
+
+[params.author]
+  name = "PnP"
+  email = "pnp@tacticalhead.uk"
+  image = "img/avatar.png"
+  imageQuality = 96
+  headline = "Do you fancy the art and the craft?"
+  bio = "Red team, RF, and hardware hacking. OSCP, PNPT."
+  links = [
+    { github = "https://github.com/r3d0t" },
+    { email = "mailto:pnp@tacticalhead.uk" },
+    { rss = "/feed.xml" },   # feed lives at /feed.xml (renamed in hugo.toml [outputFormats.RSS]); was /index.xml
+  ]

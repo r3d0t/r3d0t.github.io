@@ -1,0 +1,13 @@
+{{/* ---------------------------------------------------------------------------
+  pnp/channels.html - draw a list of posts as channel rows.
+
+  Argument: a slice (list) of post pages, e.g.
+    {{ partial "pnp/channels.html" (first 8 $posts) }}
+
+  It first finds the largest word count in the set ($max) so every row's signal
+  bar can be sized relative to the longest post, then renders one channel per post.
+---------------------------------------------------------------------------- */}}
+{{ $max := 1 }}{{ range . }}{{ if gt .WordCount $max }}{{ $max = .WordCount }}{{ end }}{{ end }}   {{/* find the longest post in the list */}}
+<div class="sx-chs">
+  {{ range $i, $p := . }}{{ partial "pnp/channel.html" (dict "page" $p "i" $i "max" $max) }}{{ end }} {{/* render each post as a row, passing its index + the shared max */}}
+</div>

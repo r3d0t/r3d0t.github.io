@@ -1,0 +1,12 @@
+{{ define "main" }}
+  {{ .Scratch.Set "scope" "list" }}
+  {{ .Store.Set "suppressBackgroundCanvas" true }}
+  {{ $pages := .RegularPages.ByDate.Reverse }}
+  {{ partial "pnp/strip.html" (dict
+      "eyebrow" "Channel log · all captures"
+      "title" .Title
+      "lead" (.Description | default "Every write-up, newest first. Hover a channel to tune in.")
+      "readout" (slice (slice "LOG" (printf "%d posts" (len $pages))) (slice "TUNED" "scanning…"))
+      "carriers" "0.12,0.34,0.5,0.62,0.78,0.92") }}
+  <section class="sx-list">{{ partial "pnp/channels.html" $pages }}</section>
+{{ end }}

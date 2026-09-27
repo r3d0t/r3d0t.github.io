@@ -1,0 +1,212 @@
+---
+title: P25 Scanner using SDRTrunk
+description: How to monitor and decode P25 digital trunked radio communications on Linux using SDRTrunk and a Software-Defined Radio dongle.
+summary: How to monitor and decode P25 digital trunked radio communications on Linux using SDRTrunk and a Software-Defined Radio dongle.
+date: 2026-01-23 10:37:00 -0500
+slug: p25-scanner
+categories:
+- Software Defined Radio
+- P25
+tags:
+- sdr
+- software defined radio
+- p25
+- trunked radio
+- sdrtunk
+- radio frequency
+- linux
+- pentoo
+weight: 1
+featured: true
+---
+> [!WARNING]
+> Listening to unencrypted police, fire, EMS, and other public safety radio transmissions is generally legal in the United States for personal, private use, as these are public airwaves.
+> However:
+>  - Do not rebroadcast, record, or share any audio, talkgroup details, or operational information publicly. This can violate federal wiretapping laws (18 U.S.C. § 2511) or state regulations in some jurisdictions.
+>  - Respect encryption: Modern P25 Phase II systems are often encrypted; attempting to decrypt is illegal under the Electronic Communications Privacy Act.
+>  - Check local laws: Some states or localities restrict scanner use while driving or impose additional rules. Verify regulations in your area
+
+For this, we need a software decoder and an SDR to work. Here is how I have set up my environment:
+
+- OS: Linux
+- Distro: [pentoo](https://pentoo.ch/about)
+- Laptop: [Framework 13](https://frame.work/laptop13)
+- Software Decoder: [SDRTrunk](https://github.com/DSheirer/sdrtrunk) 
+- Software-Defined Radio(SDR): [Nooelec NESDR SMArt v5](https://www.nooelec.com/store/nesdr-smart.html?srsltid=AfmBOooHum0eNcuoD83_Jwe7QOOuv55OR853rka0QjH8DEV6Oq22_K4Z) // [Amazon Link](https://www.amazon.com/NooElec-NESDR-Smart-Bundle-R820T2-Based/dp/B01GDN1T4S)
+
+> [!TIP]
+> New to Pentoo? See my [Pentoo installation](https://r3d0t.github.io/posts/pentoo-installation/) post. 
+
+
+# SDRTrunk
+
+SDRTrunk is an open source software decoder for monitoring trunked radio systems using Software-Defined Radios (SDRs).
+
+## Downloading SDRTrunk
+
+The first thing we need to do is download it from the [official repository](https://github.com/DSheirer/sdrtrunk).
+Get the latest release version under `Releases`
+
+![SDRTrunk releases page on GitHub](/assets/img/posts/p25-scanner/releases_page.png)
+
+Under `Assets`, we have all the compiled and compressed binaries for that version. Since we are on **Pentoo x86_64** (64-bit) we will download the `sdr-trunk-linux-x86_64-v0.6.1.zip` file
+
+![SDRTrunk Linux binary download](/assets/img/posts/p25-scanner/linux_binary.png)
+
+Now that we have it downloaded, we need to unzip the file
+
+```shell
+unzip ~/Downloads/sdr-trunk-linux-x86_64-v0.6.1.zip
+```
+![Unzipping SDRTrunk archive on Linux](/assets/img/posts/p25-scanner/unzipping.png)
+
+The `sdr-trunk` binary can be found in `sdr-trunk-linux-x86_64-v0.6.1/bin/`
+
+![SDRTrunk application binary ready to run](/assets/img/posts/p25-scanner/sdr-trunk_binary.png)
+
+We can launch it by moving to the directory and running `./sdr-trunk` or just
+
+```shell
+./sdr-trunk-linux-x86_64-v0.6.1/bin/sdr-trunk
+```
+> [!NOTE]
+> Make sure you plug your SDR directly into the usb port of your laptop before launching sdrtrunk
+
+## Setting up SDRTrunk
+
+After you start sdr-trunk for the first time you will get this screen.
+
+![SDRTrunk GPU calibration screen](/assets/img/posts/p25-scanner/gpu_calibration.png)
+
+You should read it, and then select <kbd>Calibrate</kbd>.
+
+![SDRTrunk GPU calibrating in progress](/assets/img/posts/p25-scanner/gpu_calibrating.png)
+
+While it's calibrating, you shouldn't do anything. Wait until it's finished. 
+
+Then restart sdr-trunk, after the calibration is done.
+
+Now, go to View > User Preferences > `JMBE Audio Library` and click on <kbd>Create Library</kbd>, you will get the screen below. 
+
+![JMBE audio library update in SDRTrunk](/assets/img/posts/p25-scanner/jmb3_library_update.png)
+
+Choose <kbd>Yes</kbd> and choose <kbd>Create Library</kbd> on the screen after.
+
+Next go to `Output/Tones` and test your audio to make sure you can hear the `beep`. If you can't hear anything after hitting <kbd>Test</kbd>, make sure:
+  - Your speakers aren't muted
+  - You have tested all the speakers listed under `Audio Output Device` and none of them work
+  - You can hear audio when you go on YouTube
+
+> [!TIP]
+> If you have tested and confirmed all the above, and you still can't hear anything in SDRTrunk, read the next section below `Audio Issue Fixed` for a possible solution. Otherwise, just skip it and continue to `Setting up a Playlist`
+
+### Audio Issue Fixed 
+
+List your audio devices
+```shell
+aplay -l
+```
+![Listing audio output devices in SDRTrunk](/assets/img/posts/p25-scanner/listing_audio_devices.png)
+
+In my case, my audio device is `card 1`. I will now launch sdr-trunk this way:
+```shell
+ALSA_CARD=1 ./sdr-trunk
+```
+Test the audio now, it should work! :)
+
+> [!NOTE]
+> You will have to launch sdr-trunk this way every time for the audio to work. However, I'm working on finding a better fix that will let you launch sdr-trunk normally. I will update this page, once I test it and it works fine.
+
+For a good understanding of how this all works, check out [Advanced Linux Sound Architecture](https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture#Select_the_default_PCM_via_environment_variable). It's very informative, and you might be able to find the ultimate fix.
+
+## Finding a frequency
+
+Now, we need to find a frequency we want to monitor. Let's visit [RadioReference](https://www.radioreference.com)
+
+Once there:
+- Click on Databases > RR Database > <kbd>Browse</kbd>
+
+You will see this map
+
+![Virginia state P25 trunked radio system map](/assets/img/posts/p25-scanner/state_map.png)
+
+Find your state on the map and select it. For example, let's select `Virginia` on the Map. It will take us here
+
+![Virginia P25 radio system loaded in SDRTrunk](/assets/img/posts/p25-scanner/Virginia.png)
+
+At the bottom there is the `System Name`, we can select it. That will lead us to the next page below
+
+![STARS trunked radio system in SDRTrunk](/assets/img/posts/p25-scanner/STARS.png)
+
+As we can see next to `System Type`, Virginia uses Project 25 (P25). 
+
+Now, select your county under `County`. Let's select `Loundoun`.
+On the next page, we should see something like this
+
+![P25 control channel frequency in SDRTrunk](/assets/img/posts/p25-scanner/frequency.png)
+
+We are looking for P25 under `Mode`. So far we are seeing, FMN and FM. Let's keep scrolling on the page and hope we see P25.
+
+P25 is the digital trunked radio standard used by most public safety agencies, so monitoring it lets you follow real police/fire/EMS activities. 
+
+> [!CAUTION]
+> P25e is P25 but encrypted. We should not use those frequencies.
+
+At the bottom of the page, we found a P25 frequency: `773.40625`
+![P25 digital radio traffic being decoded in SDRTrunk](/assets/img/posts/p25-scanner/p25.png)
+
+Now that we have our target frequency, let's configure SDRTrunk to monitor it by creating a playlist.
+
+## Setting Up a Playlist
+
+From the main screen, click on <kbd>Playlist Editor</kbd>
+
+![SDRTrunk playlist editor](/assets/img/posts/p25-scanner/playlist_editor.png)
+
+Then, click on <kbd>Channels</kbd> on the next screen. Next, click on <kbd>...</kbd> on the right side of the screen
+
+![P25 channel configuration in SDRTrunk](/assets/img/posts/p25-scanner/channels.png)
+
+Choose `P25 Phase 1`, and you should see something like this below:
+
+![Configuring P25 trunked system in SDRTrunk](/assets/img/posts/p25-scanner/configuring.png)
+
+You can put whatever you want or whatever helps you organize your playlist for the following:
+- `System`, `Site` and `Name`
+
+They are just Optional Labels. What you do want to pay attention to is the `Frequencies (MHz)`
+
+
+Let's put in our target frequency `773.40625`. This is what our playlist looks like
+
+![Completed SDRTrunk playlist configuration](/assets/img/posts/p25-scanner/Finished.png)
+
+Make sure you hit `save` on the right and then hit <kbd>Play</kbd>.
+
+![SDRTrunk failing to decode P25 audio — JMBE missing](/assets/img/posts/p25-scanner/failed.png)
+
+On the spectrum, it doesn't look like there is any traffic on `773.40625`.
+
+> [!WARNING]
+> P25 systems are often quiet depending on time/day. No one's talking at this time on 773.40625, for example.
+> We can try:
+> - Another P25 control channel freq in your area (Search on RadioReference)
+> - Same frequency later (evening rush sometimes = more activity)
+
+
+This is what a busy frequency (when people are talking) looks like
+
+![SDRTrunk successfully decoding live P25 audio](/assets/img/posts/p25-scanner/success.png)
+
+The big red line on the spectrum shows **active voice transmissions**. However, if a call is *`Encrypted`* you'll see the spikes (Red Lines) but won't hear anything, that's normal and expected.
+
+> [!TIP]
+> If you have tried everything, and still don't get it to work. I highly recommend joining the [RFHS Discord](https://discordapp.com/invite/JjPQhKy) and post your question in `#sdr-chat`
+
+The P25 scanner is ready. Now test different frequencies/times to catch live traffic.
+
+> [!NOTE]
+> If you are interested on doing this on Windows, check out [Tech Dad Adventures](https://youtu.be/b9Gk865-sVU?si=TUbaLW2rPQ1Y8Wm5). He does a pretty good job breaking down the steps for Windows, and goes a bit more in depth on some SDRTrunk stuff.
+
+> [!TIP]
+> Have an SDR and want another project? [Tracking Aircraft with Dump1090](https://r3d0t.github.io/posts/airplane-tracker/) shows you how to pull live ADS-B signals and map real-time aircraft with the same dongle.

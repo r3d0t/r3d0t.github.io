@@ -1,0 +1,20 @@
+# Each topic gets a real frequency, port or band from its own world.
+# pos = where its carrier sits across the waterfall (0 = left edge, 1 = right edge).
+categories:
+  red-team:               { freq: "LAN · C2",          pos: 0.12 }
+  active-directory:       { freq: "TCP 389 · LDAP",    pos: 0.17 }
+  c2:                     { freq: "mTLS 8888",         pos: 0.08 }
+  hardware-hacking:       { freq: "13.56 MHz · HF",    pos: 0.30 }
+  rfid:                   { freq: "13.56 MHz · NFC",   pos: 0.34 }
+  software-defined-radio: { freq: "24 MHz – 1.7 GHz",  pos: 0.62 }
+  ads-b:                  { freq: "1090 MHz",          pos: 0.50 }
+  p25:                    { freq: "700/800 MHz",       pos: 0.44 }
+  certifications:         { freq: "OSCP · PNPT",       pos: 0.78 }
+  oscp:                   { freq: "OffSec",            pos: 0.74 }
+  pnpt:                   { freq: "TCM Security",      pos: 0.82 }
+  reviews:                { freq: "OSCP vs PNPT",      pos: 0.86 }
+  linux:                  { freq: "/dev/tty",          pos: 0.92 }
+  pentoo:                 { freq: "Gentoo · amd64",    pos: 0.95 }
+  troubleshooting:        { freq: "dmesg -w",          pos: 0.89 }
+  burp-suite:             { freq: "TCP 8080",          pos: 0.22 }
+default: { freq: "wideband", pos: 0.5 }

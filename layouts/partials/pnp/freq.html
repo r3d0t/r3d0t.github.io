@@ -1,0 +1,21 @@
+{{/* ---------------------------------------------------------------------------
+  pnp/freq.html - look up the "frequency" for a category or tag name.
+
+  You pass in a name (e.g. "RFID" or "Software Defined Radio") and it hands back
+  a small object: { freq: "13.56 MHz - NFC", pos: 0.34 }
+    - freq = the label shown on bands, channel rows and the post strip
+    - pos  = where its spike sits on the waterfall, 0 (left) .. 1 (right)
+
+  The actual freq/pos values live in  data/spectrum.yaml  - edit them there,
+  not here. This file is just the lookup + a fallback for names that aren't listed.
+
+  Use it from another template like:
+    {{ $f := partial "pnp/freq.html" "RFID" }}   ->  {{ $f.freq }} / {{ $f.pos }}
+---------------------------------------------------------------------------- */}}
+{{ $key := . | urlize | lower }}                              {{/* normalise "Software Defined Radio" -> "software-defined-radio" so it matches the YAML keys */}}
+{{ $hit := index hugo.Data.spectrum.categories $key }}        {{/* try to find that key in data/spectrum.yaml */}}
+{{ if not $hit }}                                             {{/* not listed? make up a stable position from the name */}}
+  {{ $pos := div (float (mod (hash.FNV32a $key) 900)) 1000.0 | add 0.05 }}  {{/* hash the name -> always the same 0.05..0.95 spot */}}
+  {{ $hit = dict "freq" "wideband" "pos" $pos }}              {{/* generic "wideband" label for unknown topics */}}
+{{ end }}
+{{ return $hit }}

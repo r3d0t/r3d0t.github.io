@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="r" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ff3b4e" stop-opacity=".22"/><stop offset="1" stop-color="#ff3b4e" stop-opacity="0"/></radialGradient>
+    <radialGradient id="b" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#3b5bff" stop-opacity=".18"/><stop offset="1" stop-color="#3b5bff" stop-opacity="0"/></radialGradient>
+    <pattern id="g" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#8fb4ff" stroke-opacity=".035"/></pattern>
+    <filter id="f"><feGaussianBlur stdDeviation="50"/></filter>
+  </defs>
+  <rect width="1600" height="900" fill="#03050d"/>
+  <rect width="1600" height="900" fill="url(#g)"/>
+  <g filter="url(#f)"><ellipse cx="1300" cy="80" rx="520" ry="300" fill="url(#r)"/><ellipse cx="200" cy="860" rx="520" ry="320" fill="url(#b)"/></g>
+</svg>

@@ -1,0 +1,14 @@
+{{ define "main" }}
+  {{ .Scratch.Set "scope" "term" }}
+  {{ .Store.Set "suppressBackgroundCanvas" true }}
+  {{ $f := partial "pnp/freq.html" .Title }}
+  {{ $pages := .Pages.ByDate.Reverse }}
+  {{ $p2 := add $f.pos 0.18 }}{{ if gt $p2 1.0 }}{{ $p2 = sub $p2 1.0 }}{{ end }}
+  {{ $kind := cond (eq .Data.Plural "categories") "Band" "Tag" }}
+  {{ partial "pnp/strip.html" (dict
+      "eyebrow" (printf "%s · <a href=\"%s\">%s</a>" $kind .Parent.RelPermalink (.Data.Plural | title))
+      "title" .Title
+      "readout" (slice (slice "FREQ" $f.freq) (slice "LOG" (printf "%d capture%s" (len $pages) (cond (eq (len $pages) 1) "" "s"))))
+      "carriers" (printf "%v,%v" $f.pos $p2)) }}
+  <section class="sx-list">{{ partial "pnp/channels.html" $pages }}</section>
+{{ end }}

@@ -1,0 +1,13 @@
+{{/* ---------------------------------------------------------------------------
+  extend-head.html - Blowfish injects this into every page's <head>.
+  We use it to load the waterfall script and preload the two fonts seen first,
+  so the title and body text don't flash a fallback font on load.
+---------------------------------------------------------------------------- */}}
+{{/* Grab assets/js/waterfall.js, minify it, and fingerprint it (hash in the filename for cache-busting). */}}
+{{ $wf := resources.Get "js/waterfall.js" | resources.Minify | resources.Fingerprint "sha256" }}
+{{/* defer = run after HTML parses; integrity = browser checks the file wasn't tampered with. */}}
+<script defer src="{{ $wf.RelPermalink }}" integrity="{{ $wf.Data.Integrity }}"></script>
+{{/* Preload the display font (titles) and body font so they're ready immediately. If you change
+     which font weights the design uses first, update these two paths to match. */}}
+<link rel="preload" href="{{ "fonts/oxanium-latin-800-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ "fonts/ibm-plex-sans-latin-400-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>

@@ -1,0 +1,57 @@
+{{/* ===========================================================================
+  about.html - the /about/ page ("Operator profile").
+  A Spectrum-style header (avatar + callsign readout) over the waterfall, then
+  your About text on the left and a sidebar of bands + links on the right.
+
+  The page text itself comes from content/about.md - edit the words there.
+  This file is only the layout around that text.
+=========================================================================== */}}
+{{ define "main" }}
+  {{ .Store.Set "suppressBackgroundCanvas" true }}                {{/* use our waterfall, not the theme's background canvas */}}
+  {{ $author := site.Params.Author }}
+  {{ $posts := where site.RegularPages "Section" "posts" }}
+
+  {{/* ---- header strip ---- */}}
+  <section class="sx-strip sx-about-head">
+    <canvas data-waterfall data-carriers="0.3,0.5,0.62,0.12" aria-hidden="true"></canvas>
+    <span class="sx-marker" data-tune-marker aria-hidden="true"></span>
+    <div class="sx-strip-in sx-about-grid">
+      <div class="sx-av">
+        {{/* same square-cropped avatar as the homepage */}}
+        {{ with $author.image }}{{ with resources.Get . }}{{ $av := .Fill "300x300 Center q96" }}
+          <img src="{{ $av.RelPermalink }}" width="150" height="150" alt="{{ $author.name }}">
+        {{ end }}{{ end }}
+      </div>
+      <div>
+        <div class="sx-eyebrow">Operator profile</div>
+        <h1 class="sx-title">{{ .Title }}</h1>
+        {{/* Static "profile" readout. These are hand-written, not pulled from anywhere - edit freely. */}}
+        <div class="sx-readout">
+          <span>CALLSIGN <b>{{ $author.name }}</b></span><span>HANDLE <b>r3d0t</b></span><span>CERTS <b>OSCP · PNPT</b></span><span>LOG <b>{{ len $posts }} posts</b></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{/* ---- body: your prose + a sidebar ---- */}}
+  <article class="sx-about">
+    <div class="sx-prose prose dark:prose-invert">{{ .Content }}</div>   {{/* rendered content/about.md */}}
+    <aside class="sx-about-side">
+      {{/* Bands sidebar: your categories that have 2+ posts, each with its freq label + hover-to-tune. */}}
+      <div class="sx-h"><h2>Bands</h2></div>
+      <nav class="sx-mini">
+        {{ range site.Taxonomies.categories.ByCount }}{{ if ge .Count 2 }}
+          {{ $f := partial "pnp/freq.html" .Page.Title }}
+          <a href="{{ .Page.RelPermalink }}" data-tune="{{ $f.pos }}" data-tune-label="{{ $f.freq }}"><span>{{ .Page.Title }}</span><i>{{ $f.freq }}</i></a>
+        {{ end }}{{ end }}
+      </nav>
+      {{/* Links sidebar. Add or change your own links here. */}}
+      <div class="sx-h"><h2>Links</h2></div>
+      <nav class="sx-mini">
+        <a href="https://github.com/r3d0t"><span>GitHub</span><i>r3d0t</i></a>
+        <a href="{{ "feed.xml" | relURL }}"><span>RSS feed</span><i>feed.xml</i></a>   {{/* feed lives at /feed.xml (set in hugo.toml [outputFormats.RSS]) */}}
+        <a href="{{ "posts/" | relURL }}"><span>All posts</span><i>{{ len $posts }}</i></a>
+      </nav>
+    </aside>
+  </article>
+{{ end }}
