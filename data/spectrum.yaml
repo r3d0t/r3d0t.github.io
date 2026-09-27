@@ -7,9 +7,10 @@ categories:
   hardware-hacking:       { freq: "13.56 MHz · HF",    pos: 0.30 }
   rfid:                   { freq: "13.56 MHz · NFC",   pos: 0.34 }
   software-defined-radio: { freq: "24 MHz – 1.7 GHz",  pos: 0.62 }
+  wireless-security:      { freq: "2.4/5 GHz · Wi-Fi", pos: 0.58 }
   ads-b:                  { freq: "1090 MHz",          pos: 0.50 }
   p25:                    { freq: "700/800 MHz",       pos: 0.44 }
-  certifications:         { freq: "OSCP · PNPT",       pos: 0.78 }
+  blog:                   { freq: "broadcast",         pos: 0.78 }
   oscp:                   { freq: "OffSec",            pos: 0.74 }
   pnpt:                   { freq: "TCM Security",      pos: 0.82 }
   reviews:                { freq: "OSCP vs PNPT",      pos: 0.86 }

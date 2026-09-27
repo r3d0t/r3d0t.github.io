@@ -5,7 +5,7 @@ summary: Side-by-side comparison of OSCP and PNPT — cost, difficulty, recognit
 date: 2026-04-03 13:02:00 -0500
 slug: oscp-vs-pnpt-review
 categories:
-- Certifications
+- Blog
 - Reviews
 tags:
 - oscp

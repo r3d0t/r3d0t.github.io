@@ -68,13 +68,13 @@
          links to that category page, and tunes the waterfall on hover. To change which four show,
          edit the slice list below (names must match your category names). */}}
     <nav class="sx-bands" aria-label="Topics">
-      {{ range slice "Red Team" "Hardware Hacking" "Software Defined Radio" "Certifications" }}
+      {{ range slice "Red Team" "Hardware Hacking" "Software Defined Radio" "Blog" }}
         {{ $f := partial "pnp/freq.html" . }}                                  {{/* freq + pos for this topic */}}
         {{ with site.GetPage (printf "/categories/%s" (. | urlize | lower)) }} {{/* only show it if that category page exists */}}
           <a class="sx-band" href="{{ .RelPermalink }}" data-tune="{{ $f.pos }}" data-tune-label="{{ $f.freq }}">
             <span class="f">{{ $f.freq }}</span>
             {{/* Shorten two long names for display only (the category itself keeps its real title). */}}
-            <span class="n">{{ cond (eq .Title "Software Defined Radio") "SDR" (cond (eq .Title "Hardware Hacking") "RFID & Hardware" .Title) }}</span>
+            <span class="n">{{ cond (eq .Title "Software Defined Radio") "Wireless & SDR" (cond (eq .Title "Hardware Hacking") "RFID & Hardware" .Title) }}</span>
           </a>
         {{ end }}
       {{ end }}
