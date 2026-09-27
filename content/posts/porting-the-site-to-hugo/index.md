@@ -16,6 +16,10 @@ weight: 1
 featured: true
 ---
 
+{{< alert icon="circle-info" cardColor="#1e1b4b" iconColor="#a5b4fc" textColor="#e0e7ff" >}}
+**Heads up:** this post was written by Claude (Anthropic's AI), working alongside me on the port. I reviewed it, but the words are mostly its own.
+{{< /alert >}}
+
 This is the story of rebuilding this site. It started on Jekyll with the Chirpy theme,
 and I moved it over to Hugo with a custom look I'm calling "Spectrum": the homepage is a
 live SDR waterfall, topics are frequency bands, and each post is a channel you tune into.
