@@ -1,0 +1,151 @@
+/* ==========================================================================
+   Pwn & Pivot · Spectrum
+   Midnight palette, Oxanium display, IBM Plex Sans body, IBM Plex Mono data.
+   --------------------------------------------------------------------------
+   This is the custom styling layer on top of the Blowfish theme. Blowfish loads
+   it automatically because it lives at assets/css/custom.css.
+
+   Layout:
+     1. @font-face      - self-hosted fonts (files in static/fonts/)
+     2. :root           - the --sx-* design tokens (colours + font stacks)
+     3. base            - typography, links, code blocks, header/footer tweaks
+     4. Spectrum bits   - every .sx-* component used by the custom pages
+     5. media queries   - phone layout + reduce-motion
+
+   The site-wide theme palette (neutral/primary/secondary) is separate, in
+   assets/css/schemes/pnp.css. This file's --sx-* tokens drive the custom pages.
+   ========================================================================== */
+
+/* ---- 1. fonts (served from static/fonts/, so no Google Fonts request) ---- */
+@font-face { font-family: "Oxanium"; font-weight: 500; font-display: swap; src: url("../fonts/oxanium-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Oxanium"; font-weight: 700; font-display: swap; src: url("../fonts/oxanium-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Oxanium"; font-weight: 800; font-display: swap; src: url("../fonts/oxanium-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 400; font-display: swap; src: url("../fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 400; font-style: italic; font-display: swap; src: url("../fonts/ibm-plex-sans-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 600; font-display: swap; src: url("../fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 400; font-display: swap; src: url("../fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-display: swap; src: url("../fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 600; font-display: swap; src: url("../fonts/ibm-plex-mono-latin-600-normal.woff2") format("woff2"); }
+
+/* ---- 2. design tokens: change a value here and it updates everywhere ------ */
+:root {
+  /* colours: bg = page, panel = translucent cards, line = borders, text/dim = body/muted */
+  --sx-bg: #03050d; --sx-panel: rgba(8, 12, 28, .72); --sx-line: #17203a; --sx-text: #d7dcf0; --sx-dim: #6c7596;
+  /* accents: red = primary, amber = secondary/labels, ice = the blue used for links/data */
+  --sx-red: #ff3b4e; --sx-amber: #ffb547; --sx-ice: #8fb4ff;
+  /* font stacks: display = titles, body = paragraphs, mono = data/labels/nav */
+  --sx-display: "Oxanium", system-ui, sans-serif;
+  --sx-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sx-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* ---- 3. base ------------------------------------------------------------- */
+html.dark body { background: var(--sx-bg); overflow-x: clip; }   /* midnight background; clip kills sideways scroll from the full-bleed strips */
+body { font-family: var(--sx-body); }
+h1, h2, h3, h4, .prose h1, .prose h2, .prose h3, .prose h4 { font-family: var(--sx-display); letter-spacing: -.005em; } /* all headings use Oxanium */
+code, kbd, pre, samp, .prose code { font-family: var(--sx-mono); }   /* all code uses the mono font */
+.prose a { text-decoration-color: rgba(255, 59, 78, .5); text-underline-offset: 3px; }  /* red-tinted underline on body links */
+.dark .prose :where(pre) { background: #070b1a !important; border: 1px solid var(--sx-line); }        /* code blocks: darker panel + border */
+.dark .prose :where(code):not(pre code) { background: #0d1430; color: #ffc7cd; padding: .1em .35em; border-radius: 4px; } /* inline code: pink chip */
+.dark .prose :where(blockquote) { border-left-color: var(--sx-red); }  /* blockquotes get a red left bar */
+::selection { background: rgba(255, 59, 78, .35); color: #fff; }        /* red text-selection highlight */
+
+/* header + footer: monospace nav on the midnight glass */
+#menu-blur, header nav, header .main-menu { font-family: var(--sx-mono); }
+header nav a, header .main-menu a { letter-spacing: .02em; }
+footer { font-family: var(--sx-mono); font-size: .8rem; }
+
+/* tag/category badges restyled as little frequency chips */
+.article-link--card a[href*="/tags/"]:nth-of-type(n+4),
+.article-link--simple a[href*="/tags/"]:nth-of-type(n+4) { display: none; }   /* only show the first 3 tags on cards, hide the rest */
+.dark a[href*="/tags/"] > span > span,
+.dark a[href*="/categories/"] > span > span { font-family: var(--sx-mono); border-color: rgba(143, 180, 255, .35) !important; color: var(--sx-ice) !important; } /* mono + ice-blue chips */
+
+/* ---- 4. shared Spectrum components --------------------------------------- */
+
+/* .sx-strip = the full-bleed banner that holds a waterfall (used by home, about, list pages). */
+.sx-strip { position: relative; margin: -1rem calc(50% - 50vw) 0; padding: clamp(6rem, 12vw, 7.5rem) 1rem 2.5rem; overflow: hidden; isolation: isolate; color: var(--sx-text); } /* the negative side margins make it span the full window width */
+.sx-strip.is-compact { padding-bottom: 1.8rem; }                       /* shorter variant */
+.sx-strip canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }  /* the waterfall sits behind everything */
+.sx-strip::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to bottom, rgba(3,5,13,.35), rgba(3,5,13,.6) 55%, var(--sx-bg) 100%); } /* dark gradient over the waterfall so text stays readable */
+.sx-marker { position: absolute; top: 0; bottom: 0; width: 1px; background: linear-gradient(var(--sx-amber), transparent); opacity: 0; transition: left .25s ease, opacity .2s; z-index: -1; pointer-events: none; } /* the amber "tuned" line waterfall.js slides around */
+.sx-strip-in { max-width: 60rem; margin: 0 auto; }                     /* keeps the content column centred at a readable width */
+
+/* the small monospace label above a title, e.g. "Operator profile" */
+.sx-eyebrow { font-family: var(--sx-mono); font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--sx-amber); }
+.sx-eyebrow a { color: var(--sx-ice); text-decoration: none; } .sx-eyebrow a:hover { color: #fff; }
+
+/* the big page title. Uses clamp() so it scales with the viewport (min, preferred, max). */
+.sx-title { font-family: var(--sx-display); font-weight: 800; font-size: clamp(2.2rem, 7vw, 4.4rem); line-height: .98; letter-spacing: -.02em; color: #fff; margin: .4rem 0 .5rem; text-wrap: balance; }
+.sx-title span { color: var(--sx-red); text-shadow: 0 0 24px rgba(255,59,78,.6); }   /* the reddened, glowing bit (e.g. the "&") */
+.sx-lead { color: #b9c0dc; max-width: 52ch; line-height: 1.6; font-size: clamp(.92rem, 1.6vw, 1.05rem); margin: 0; }  /* the intro sentence */
+
+/* the monospace stat row, e.g. "CF 1090.000 MHz   SR 2.4 MS/s ..." */
+.sx-readout { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; margin-top: 1rem; font-family: var(--sx-mono); font-size: .72rem; color: var(--sx-dim); font-variant-numeric: tabular-nums; }
+.sx-readout b { color: var(--sx-ice); font-weight: 500; }   /* the value part in ice-blue */
+
+/* the round avatar with the red ring + spinning dashed halo */
+.sx-av { position: relative; width: clamp(96px, 16vw, 150px); aspect-ratio: 1; flex: none; }
+.sx-av img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid var(--sx-red); box-shadow: 0 0 40px rgba(255,59,78,.45); }
+.sx-av::after { content: ""; position: absolute; inset: -10px; border-radius: 50%; border: 1px dashed rgba(255,59,78,.5); animation: sx-spin 18s linear infinite; } /* the slow dashed halo */
+@keyframes sx-spin { to { transform: rotate(360deg) } }   /* drives that halo (turned off under reduce-motion, see bottom) */
+
+/* topic bands: the row of clickable frequency cards on the homepage */
+.sx-bands { max-width: 60rem; margin: 2rem auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; }   /* 4 across on desktop */
+.sx-bands--grid { grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); margin-top: .5rem; }                      /* auto-wrapping variant */
+.sx-band { display: flex; flex-direction: column; gap: .15rem; padding: .85rem .95rem; border: 1px solid var(--sx-line); border-radius: 6px; background: var(--sx-panel); backdrop-filter: blur(6px); text-decoration: none; color: var(--sx-text); transition: border-color .2s, transform .2s; }
+.sx-band:hover, .sx-band:focus-visible { border-color: var(--sx-red); transform: translateY(-2px); outline: none; }        /* lift + redden on hover */
+.sx-band .f { font-family: var(--sx-mono); font-size: .68rem; color: var(--sx-amber); letter-spacing: .08em; }             /* the freq label */
+.sx-band .n { font-family: var(--sx-display); font-weight: 700; font-size: 1.08rem; color: #fff; }                         /* the topic name */
+.sx-band .c { display: grid; grid-template-columns: 1fr auto; gap: .6rem; align-items: center; margin-top: .45rem; font-family: var(--sx-mono); font-size: .66rem; color: var(--sx-dim); }
+
+/* the "Channel log" list + its heading row */
+.sx-list { max-width: 60rem; margin: 2.2rem auto 0; color: var(--sx-text); }
+.sx-h { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--sx-line); padding-bottom: .5rem; margin-bottom: .4rem; }
+.sx-h h2 { font-family: var(--sx-display); font-weight: 700; font-size: 1.25rem; color: #fff; margin: 0; letter-spacing: .02em; }
+.sx-h a { font-family: var(--sx-mono); font-size: .75rem; color: var(--sx-ice); text-decoration: none; } .sx-h a:hover { color: #fff; }
+
+/* .sx-ch = one channel row (a post). Grid = [CH number | title+meta | signal meter]. */
+.sx-ch { display: grid; grid-template-columns: 4.5ch 1fr 9rem; gap: 1rem; align-items: center; padding: .9rem .6rem; margin: 0 -.6rem; border-radius: 6px; border-bottom: 1px solid rgba(23,32,58,.6); text-decoration: none; color: var(--sx-text); }
+.sx-ch:hover, .sx-ch:focus-visible { background: rgba(255,59,78,.06); outline: none; }   /* faint red wash on hover */
+.sx-ch:hover .t, .sx-ch:focus-visible .t { color: #fff; }
+.sx-ch .no { font-family: var(--sx-mono); color: var(--sx-red); font-size: .75rem; font-variant-numeric: tabular-nums; }  /* the CH01 number */
+.sx-ch .t { display: block; font-family: var(--sx-display); font-weight: 700; font-size: clamp(1rem, 2vw, 1.15rem); color: var(--sx-text); line-height: 1.25; } /* title */
+.sx-ch .m { display: block; font-family: var(--sx-mono); font-size: .7rem; color: var(--sx-dim); margin-top: .3rem; }      /* the date · category · freq · time line */
+.sx-ch .m b { color: var(--sx-amber); font-weight: 500; } .sx-ch .m i { color: var(--sx-ice); font-style: normal; }
+.sx-meter { display: grid; gap: .3rem; font-family: var(--sx-mono); font-size: .65rem; color: var(--sx-dim); text-align: right; font-variant-numeric: tabular-nums; } /* "N words" + bar */
+.sx-bar { display: block; height: 6px; background: #0d1430; border-radius: 3px; overflow: hidden; }                        /* the bar track */
+.sx-bar i { display: block; height: 100%; background: linear-gradient(90deg, #3b5bff, var(--sx-red) 70%, var(--sx-amber)); } /* the filled bar; width set inline per post */
+
+/* tag "chips" with a little signal underline (used on tag/category index pages) */
+.sx-tags { max-width: 60rem; margin: .5rem auto 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.sx-tag { position: relative; display: inline-flex; gap: .6rem; align-items: baseline; padding: .45rem .7rem .55rem; border: 1px solid var(--sx-line); border-radius: 4px; background: var(--sx-panel); font-family: var(--sx-mono); font-size: .8rem; color: var(--sx-text); text-decoration: none; overflow: hidden; }
+.sx-tag::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: var(--w); background: linear-gradient(90deg, #3b5bff, var(--sx-red)); } /* underline width = --w, set inline (bigger = more posts) */
+.sx-tag b { color: var(--sx-amber); font-weight: 500; font-size: .7rem; }
+.sx-tag:hover, .sx-tag:focus-visible { border-color: var(--sx-red); color: #fff; outline: none; }
+
+/* about page: prose column + sidebar */
+.sx-about-grid { display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem, 4vw, 2.5rem); align-items: center; }   /* avatar | text in the header */
+.sx-about { max-width: 60rem; margin: 2rem auto 0; display: grid; grid-template-columns: minmax(0, 1fr) 16rem; gap: 3rem; } /* body text | 16rem sidebar */
+.sx-about .sx-prose { max-width: 65ch; }
+.sx-about .sx-prose h2 { font-size: 1.3rem; }
+.sx-about-side { display: grid; gap: .6rem; align-content: start; }
+.sx-mini { display: grid; margin-bottom: 1.2rem; }                     /* a compact list of links/bands in the sidebar */
+.sx-mini a { display: flex; justify-content: space-between; gap: 1rem; padding: .55rem .2rem; border-bottom: 1px solid rgba(23,32,58,.7); color: var(--sx-text); text-decoration: none; font-size: .9rem; }
+.sx-mini a i { font-family: var(--sx-mono); font-style: normal; font-size: .7rem; color: var(--sx-amber); white-space: nowrap; }  /* the right-hand freq/value */
+.sx-mini a:hover, .sx-mini a:focus-visible { color: #fff; outline: none; } .sx-mini a:hover i { color: var(--sx-red); }
+
+/* the thin waterfall band shown above each post's hero image (see single.html) */
+.sx-post-band { position: relative; height: 56px; margin: -.25rem 0 1rem; border: 1px solid var(--sx-line); border-radius: 8px; overflow: hidden; }
+.sx-post-band canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sx-post-band .lbl { position: absolute; left: .8rem; bottom: .45rem; font-family: var(--sx-mono); font-size: .68rem; color: var(--sx-dim); background: rgba(3,5,13,.75); padding: .1rem .45rem; border-radius: 3px; } /* the "TUNED ..." caption */
+.sx-post-band .lbl b { color: var(--sx-amber); font-weight: 500; }
+
+/* ---- 5. small screens + reduce-motion ------------------------------------ */
+@media (max-width: 720px) {
+  .sx-bands { grid-template-columns: repeat(2, 1fr); }                 /* 4 bands -> 2 columns */
+  .sx-ch { grid-template-columns: 4ch 1fr; } .sx-meter { display: none; } /* drop the signal meter to fit narrow screens */
+  .sx-about { grid-template-columns: 1fr; gap: 1rem; }                 /* sidebar drops below the text */
+  .sx-about-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .sx-av::after { animation: none; } .sx-band, .sx-marker { transition: none; } } /* respect "reduce motion": stop the halo + transitions */

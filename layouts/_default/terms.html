@@ -1,0 +1,35 @@
+{{ define "main" }}
+  {{ .Scratch.Set "scope" "terms" }}
+  {{ .Store.Set "suppressBackgroundCanvas" true }}
+  {{ $isCat := eq .Data.Plural "categories" }}
+  {{ $terms := .Data.Terms.ByCount }}
+  {{ $max := 1 }}{{ range $terms }}{{ if gt .Count $max }}{{ $max = .Count }}{{ end }}{{ end }}
+  {{ $carriers := slice }}{{ range first 6 $terms }}{{ $carriers = $carriers | append (partial "pnp/freq.html" .Page.Title).pos }}{{ end }}
+  {{ partial "pnp/strip.html" (dict
+      "eyebrow" (cond $isCat "Band plan" "Signal index")
+      "title" .Title
+      "lead" (cond $isCat "Every topic on the site, sorted by how much traffic it carries. Hover a band to tune it." "Every tag, sorted by how often it shows up.")
+      "readout" (slice (slice (cond $isCat "BANDS" "TAGS") (printf "%d" (len $terms))) (slice "TUNED" "scanning…"))
+      "carriers" (delimit $carriers ",")) }}
+  {{ if $isCat }}
+    <section class="sx-bands sx-bands--grid">
+      {{ range $terms }}
+        {{ $f := partial "pnp/freq.html" .Page.Title }}
+        <a class="sx-band" href="{{ .Page.RelPermalink }}" data-tune="{{ $f.pos }}" data-tune-label="{{ $f.freq }}">
+          <span class="f">{{ $f.freq }}</span>
+          <span class="n">{{ .Page.Title }}</span>
+          <span class="c"><span class="sx-bar"><i style="width: {{ div (mul .Count 100) $max }}%"></i></span><span>{{ .Count }} post{{ if ne .Count 1 }}s{{ end }}</span></span>
+        </a>
+      {{ end }}
+    </section>
+  {{ else }}
+    <section class="sx-tags">
+      {{ range $terms }}
+        {{ $f := partial "pnp/freq.html" .Page.Title }}
+        <a class="sx-tag" href="{{ .Page.RelPermalink }}" data-tune="{{ $f.pos }}" data-tune-label="#{{ .Page.Title }}" style="--w: {{ div (mul .Count 100) $max }}%">
+          <span>#{{ .Page.Title }}</span><b>{{ .Count }}</b>
+        </a>
+      {{ end }}
+    </section>
+  {{ end }}
+{{ end }}

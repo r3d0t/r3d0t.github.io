@@ -1,0 +1,21 @@
+[[main]]
+  name = "Posts"
+  pageRef = "posts"
+  weight = 10
+[[main]]
+  name = "Categories"
+  pageRef = "categories"
+  weight = 20
+[[main]]
+  name = "Tags"
+  pageRef = "tags"
+  weight = 30
+[[main]]
+  name = "About"
+  pageRef = "about"
+  weight = 40
+[[main]]
+  identifier = "github"
+  pre = "github"
+  url = "https://github.com/r3d0t"
+  weight = 50

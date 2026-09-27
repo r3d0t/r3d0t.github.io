@@ -1,0 +1,25 @@
+{{/* ---------------------------------------------------------------------------
+  pnp/channel.html - one post drawn as a "channel" row (the CHNN lines on the
+  homepage and posts list). Usually called in a loop by pnp/channels.html.
+
+  Arguments (passed as a dict):
+    page = the post page
+    i    = its 0-based index in the list (used for the CH01, CH02... number)
+    max  = the biggest word count in the whole list (so the little signal-bar
+           can be drawn as a percentage of the longest post)
+
+  The row links to the post, and data-tune / data-tune-label make hovering it
+  tune the waterfall to this post's band (see waterfall.js).
+---------------------------------------------------------------------------- */}}
+{{ $p := .page }}
+{{ $cat := "" }}{{ with $p.Params.categories }}{{ $cat = index . 0 }}{{ end }}   {{/* use the post's first category as its band */}}
+{{ $f := partial "pnp/freq.html" ($cat | default "default") }}                    {{/* look up that band's freq + waterfall position */}}
+<a class="sx-ch" href="{{ $p.RelPermalink }}" data-tune="{{ $f.pos }}" data-tune-label="{{ $f.freq }}">
+  <span class="no">CH{{ printf "%02d" (add .i 1) }}</span>                          {{/* channel number, 1-based and zero-padded: CH01, CH02 ... */}}
+  <span>
+    <span class="t">{{ $p.Title }}</span>                                          {{/* post title */}}
+    <span class="m">{{ $p.Date.Format "2006-01-02" }} · {{ with $cat }}<b>{{ . }}</b> · {{ end }}<i>{{ $f.freq }}</i> · {{ $p.ReadingTime }} min</span> {{/* date · category · freq · read time */}}
+  </span>
+  {{/* signal-strength meter: bar width = this post's words as a % of the longest post (min 1 to avoid divide-by-zero) */}}
+  <span class="sx-meter"><span>{{ $p.WordCount }} words</span><span class="sx-bar"><i style="width: {{ div (mul $p.WordCount 100) (.max | default 1) }}%"></i></span></span>
+</a>

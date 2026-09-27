@@ -1,0 +1,90 @@
+{{/* ===========================================================================
+  home/spectrum.html - THE HOMEPAGE.
+  The "Spectrum" layout: a live SDR waterfall up top, topics shown as frequency
+  bands, and recent posts listed as tuned channels underneath.
+
+  This partial is what config/_default/params.toml -> [homepage] layout = "spectrum"
+  selects. To go back to a stock Blowfish homepage, change that layout value.
+
+  The three main pieces below:
+    1. the hero strip (avatar + title + live readout)
+    2. the topic bands (each links to a category and tunes the waterfall)
+    3. the "Channel log" (recent posts as channel rows)
+=========================================================================== */}}
+{{/* Tell the theme not to also paint its own site-wide background canvas here - we have the waterfall. */}}
+{{ .Store.Set "suppressBackgroundCanvas" true }}
+{{ $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse }}   {{/* all posts, newest first */}}
+{{ $author := site.Params.Author }}                                          {{/* author block from params.toml (name, image) */}}
+
+{{/* Styles that only exist on the homepage live here so they don't weigh down every page.
+     The shared Spectrum look (.sx-*) is in assets/css/custom.css. Tweak homepage-only spacing/ruler below. */}}
+<style>
+  .sx-home { padding-top: clamp(6.5rem, 13vw, 9rem); }
+  .sx-ruler { position: absolute; left: 0; right: 0; top: clamp(4.8rem, 9vw, 5.8rem); display: flex; justify-content: space-between;
+    padding: 0 clamp(.5rem, 3vw, 2rem); font-family: var(--sx-mono); font-size: .68rem; color: var(--sx-dim); letter-spacing: .04em;
+    font-variant-numeric: tabular-nums; border-top: 1px solid rgba(143,180,255,.18); }
+  .sx-ruler span { position: relative; padding-top: .4rem; }
+  .sx-ruler span::before { content: ""; position: absolute; top: -1px; left: 50%; width: 1px; height: 6px; background: rgba(143,180,255,.35); }
+  .sx-ruler span.cf { color: var(--sx-red); } .sx-ruler span.cf::before { height: 10px; background: var(--sx-red); }  /* the red centre-frequency tick */
+  .sx-core { display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem, 4vw, 2.5rem); align-items: center; }
+  .sx-home .sx-title { font-size: clamp(2.6rem, 8.5vw, 5.4rem); }
+  .sx-hint { font-family: var(--sx-mono); font-size: .68rem; color: var(--sx-dim); }
+  @media (max-width: 720px) { .sx-core { grid-template-columns: 1fr; } .sx-ruler span:nth-child(even) { display: none; } } /* stack + thin the ruler on phones */
+</style>
+
+{{/* ---- 1. HERO STRIP ---- */}}
+<section class="sx-strip sx-home">
+  {{/* data-carriers seeds the six bright spikes across the hero waterfall. aria-hidden: purely decorative. */}}
+  <canvas data-waterfall data-carriers="0.5,0.22,0.71,0.86,0.36,0.6" aria-hidden="true"></canvas>
+  <span class="sx-marker" data-tune-marker aria-hidden="true"></span>   {{/* amber marker line, moved by waterfall.js on hover */}}
+
+  {{/* Decorative frequency ruler tuned around 1090 MHz (ADS-B, the aircraft band). Pure flavour - edit the numbers freely. */}}
+  <div class="sx-ruler" aria-hidden="true">
+    <span>1088.8</span><span>1089.2</span><span>1089.6</span><span class="cf">1090.000 MHz</span><span>1090.4</span><span>1090.8</span><span>1091.2</span>
+  </div>
+
+  <div class="sx-strip-in">
+    <div class="sx-core">
+      <div class="sx-av">
+        {{/* Avatar: pulled from params.toml author.image, cropped square at 300px, shown at 150px. */}}
+        {{ with $author.image }}{{ with resources.Get . }}{{ $av := .Fill "300x300 Center q96" }}
+          <img src="{{ $av.RelPermalink }}" width="150" height="150" alt="{{ $author.name }}">
+        {{ end }}{{ end }}
+      </div>
+      <div>
+        <div class="sx-eyebrow">{{ $author.name }} · r3d0t · tuned in</div>   {{/* small line above the title */}}
+        <h1 class="sx-title">Pwn <span>&amp;</span> Pivot</h1>                 {{/* the big site title; the <span> reddens the "&" */}}
+        {{/* The homepage lead sentence. This is the one line most worth rewording in your own voice. */}}
+        <p class="sx-lead">Red teaming, RF and software-defined radio, RFID and hardware hacking. Real labs and real captures, written up so you can reproduce them.</p>
+        {{/* Fake SDR readout. CF = centre freq (the "TUNED" value hover rewrites), SR = sample rate, MODE, LOG = live post count. */}}
+        <div class="sx-readout">
+          <span>CF <b data-tune-readout="1090.000 MHz">1090.000 MHz</b></span><span>SR <b>2.4 MS/s</b></span><span>MODE <b>ADS-B</b></span><span>LOG <b>{{ len $posts }} captures</b></span>
+        </div>
+      </div>
+    </div>
+
+    {{/* ---- 2. TOPIC BANDS ---- */}}
+    {{/* The four featured topics. Each name is looked up in spectrum.yaml for its freq + position,
+         links to that category page, and tunes the waterfall on hover. To change which four show,
+         edit the slice list below (names must match your category names). */}}
+    <nav class="sx-bands" aria-label="Topics">
+      {{ range slice "Red Team" "Hardware Hacking" "Software Defined Radio" "Certifications" }}
+        {{ $f := partial "pnp/freq.html" . }}                                  {{/* freq + pos for this topic */}}
+        {{ with site.GetPage (printf "/categories/%s" (. | urlize | lower)) }} {{/* only show it if that category page exists */}}
+          <a class="sx-band" href="{{ .RelPermalink }}" data-tune="{{ $f.pos }}" data-tune-label="{{ $f.freq }}">
+            <span class="f">{{ $f.freq }}</span>
+            {{/* Shorten two long names for display only (the category itself keeps its real title). */}}
+            <span class="n">{{ cond (eq .Title "Software Defined Radio") "SDR" (cond (eq .Title "Hardware Hacking") "RFID & Hardware" .Title) }}</span>
+          </a>
+        {{ end }}
+      {{ end }}
+    </nav>
+  </div>
+</section>
+
+{{/* ---- 3. CHANNEL LOG (recent posts) ---- */}}
+<section class="sx-list">
+  <div class="sx-h"><h2>Channel log</h2><a href="{{ "posts/" | relURL }}">all {{ len $posts }} →</a></div>
+  {{ partial "pnp/channels.html" (first 8 $posts) }}   {{/* show the 8 newest posts as channel rows; change 8 to taste */}}
+  <p class="sx-hint">Hover a channel to tune the waterfall to its band.</p>
+</section>
