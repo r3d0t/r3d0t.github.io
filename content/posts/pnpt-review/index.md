@@ -5,7 +5,7 @@ summary: Honest review of the PNPT certification by TCM Security — exam format
 date: 2026-03-27 18:15:00 -0500
 slug: pnpt-review
 categories:
-- Certifications
+- Blog
 - PNPT
 tags:
 - pnpt

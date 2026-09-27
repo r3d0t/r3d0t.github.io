@@ -5,7 +5,7 @@ summary: Honest review of the OSCP exam — difficulty, preparation tips, what t
 date: 2026-03-12 10:41:00 -0500
 slug: oscp-review
 categories:
-- Certifications
+- Blog
 - OSCP
 tags:
 - oscp

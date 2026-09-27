@@ -14,8 +14,13 @@
 {{ $p := .page }}
 {{ $cat := "" }}{{ with $p.Params.categories }}{{ $cat = index . 0 }}{{ end }}   {{/* use the post's first category as its band */}}
 {{ $f := partial "pnp/freq.html" ($cat | default "default") }}                    {{/* look up that band's freq + waterfall position */}}
+{{/* Channel number = this post's chronological rank among ALL posts, oldest = CH01.
+     It's a stable ID: it doesn't depend on the display order or which slice we're showing,
+     so a post keeps its number forever and a new post just takes the next one up. */}}
+{{ $all := (where site.RegularPages "Section" "posts").ByDate }}                   {{/* every post, oldest first */}}
+{{ $num := 0 }}{{ range $idx, $pg := $all }}{{ if eq $pg.RelPermalink $p.RelPermalink }}{{ $num = add $idx 1 }}{{ end }}{{ end }} {{/* find this post's 1-based position */}}
 <a class="sx-ch" href="{{ $p.RelPermalink }}" data-tune="{{ $f.pos }}" data-tune-label="{{ $f.freq }}">
-  <span class="no">CH{{ printf "%02d" (add .i 1) }}</span>                          {{/* channel number, 1-based and zero-padded: CH01, CH02 ... */}}
+  <span class="no">CH{{ printf "%02d" $num }}</span>                               {{/* stable channel number, zero-padded: CH01 = oldest post */}}
   <span>
     <span class="t">{{ $p.Title }}</span>                                          {{/* post title */}}
     <span class="m">{{ $p.Date.Format "2006-01-02" }} · {{ with $cat }}<b>{{ . }}</b> · {{ end }}<i>{{ $f.freq }}</i> · {{ $p.ReadingTime }} min</span> {{/* date · category · freq · read time */}}
