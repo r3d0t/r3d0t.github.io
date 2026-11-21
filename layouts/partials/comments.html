@@ -1,0 +1,48 @@
+{{/* ---------------------------------------------------------------------------
+  comments.html - Giscus comments (GitHub Discussions), rendered by Blowfish
+  when [article] showComments = true in config/_default/params.toml.
+
+  Uses mapping="pathname" with the same repo/category IDs as the old Chirpy
+  site so existing discussion threads stay attached to /posts/<slug>/.
+  Syncs Giscus's theme automatically with Blowfish's dark/light toggle.
+---------------------------------------------------------------------------- */}}
+<div class="giscus-wrapper mt-6" id="giscus-comments"></div>
+<script>
+  (() => {
+    const getTheme = () =>
+      document.documentElement.classList.contains("dark") ? "transparent_dark" : "light";
+
+    const s = document.createElement("script");
+    s.src = "https://giscus.app/client.js";
+    s.async = true;
+    s.crossOrigin = "anonymous";
+    s.setAttribute("data-repo", "r3d0t/r3d0t.github.io");
+    s.setAttribute("data-repo-id", "R_kgDOQ5GDFA");
+    s.setAttribute("data-category", "Comments");
+    s.setAttribute("data-category-id", "DIC_kwDOQ5GDFM4C1YNW");
+    s.setAttribute("data-mapping", "pathname");
+    s.setAttribute("data-strict", "0");
+    s.setAttribute("data-reactions-enabled", "1");
+    s.setAttribute("data-emit-metadata", "0");
+    s.setAttribute("data-input-position", "bottom");
+    s.setAttribute("data-theme", getTheme());
+    s.setAttribute("data-lang", "en");
+    s.setAttribute("data-loading", "lazy");
+    document.getElementById("giscus-comments").appendChild(s);
+
+    // Keep Giscus in sync when the visitor toggles Blowfish's dark/light switcher.
+    new MutationObserver(() => {
+      const iframe = document.querySelector("iframe.giscus-frame");
+      if (!iframe) return;
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: getTheme() } } },
+        "https://giscus.app"
+      );
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+  })();
+</script>
+<noscript>
+  <p class="text-sm text-neutral-500 dark:text-neutral-400">
+    Enable JavaScript to view or post comments via GitHub Discussions.
+  </p>
+</noscript>

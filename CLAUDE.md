@@ -57,11 +57,6 @@ hugo --gc --minify     # production build into public/
 
 ## Still to do
 
-- **Comments (Giscus):** not wired yet. Old Chirpy config: repo `r3d0t/r3d0t.github.io`,
-  repo_id `R_kgDOQ5GDFA`, category `Comments`, category_id `DIC_kwDOQ5GDFM4C1YNW`, mapping
-  `pathname`, reactions on. Add it as `layouts/partials/comments.html` (Blowfish renders this
-  partial when `showComments = true` in `[article]`). Mapping by pathname keeps existing
-  threads attached because post paths are unchanged.
 - **`static/assets/img/posts/rfid-hacking-2/NFC-URI Prefix Mapping`** is an extensionless text
   file that `rfid-hacking-pt2` links to as an image — fix the reference.
 - **Categories cleanup:** "Blog" is currently a catch-all (cert reviews + meta posts), and
@@ -79,6 +74,7 @@ hugo --gc --minify     # production build into public/
 | Homepage | `layouts/partials/home/spectrum.html` |
 | Posts list / tag + category pages / About | `layouts/_default/list.html`, `term.html`, `terms.html`, `about.html` |
 | Post page (theme copy + waterfall band) | `layouts/_default/single.html` |
+| Comments (Giscus / GitHub Discussions) | `layouts/partials/comments.html` |
 | Channel row, header strip, frequency lookup | `layouts/partials/pnp/` |
 | Head hook (loads waterfall.js, preloads fonts) | `layouts/partials/extend-head.html` |
 | Unused prototype homepages | `layouts/partials/home/terminal.html`, `hud.html`, `landing.html` |
